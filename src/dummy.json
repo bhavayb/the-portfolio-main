@@ -1,0 +1,564 @@
+
+{
+  "about": {
+    "name": "Bhavay Batra",
+    "title": "Software Developer",
+    "subTitle": "I develop backend systems and web applications",
+    "description": "Pre-final year BTech student and software developer with hands-on experience in building web applications and working across startup and consulting environments. Currently serving as Technical Head and Senior Associate Consultant at 180 Degrees Consulting, where I work at the intersection of technology and problem-solving. Strong foundation in data structures, a practical approach to development, and a keen interest in building scalable, real-world software solutions.",
+    "quote": "The only time you truly fail, is when you decide to give up.",
+    "exp_year": "1",
+    "address": "New Delhi , India",
+    "some_total": "90",
+    "phoneNumber": "+91-9319778881",
+    "contactEmail": "batrabhavay79@gmail.com",
+    "avatar": {
+      "public_id": "portfolio3/1713995155677-122l5x.webp",
+      "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1713995155677-122l5x.webp"
+    },
+    "alternateAvatars": [
+      {
+        "_id": "676e772d8a9e1d0a8b0647ca",
+        "public_id": "portfolio3/1713996156944-1hro1b.webp",
+        "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1713996156944-1hro1b.webp"
+      }
+    ]
+  },
+  "usageMetrics": {
+    "visits": 0,
+    "downloads": 0
+  },
+  "_id": "65b3a22c01d900e96c4219ae",
+  "username": "portfolio3",
+  "email": "batrabhavay79@gmail.com",
+  "role": "admin",
+  "timeline": [
+    {
+      "company_name": "",
+      "summary": "Secondary Education, Central Board of Secondary Education (CBSE)",
+      "sequence": 6,
+      "startDate": "2020-04-13T00:00:00.000Z",
+      "endDate": "2021-05-13T00:00:00.000Z",
+      "jobTitle": "Modern Delhi Public School",
+      "jobLocation": " New Delhi, India",
+      "bulletPoints": [
+        "Built core fundamentals across subjects and learned structured learning habits.",
+        "Developed curiosity, clarity in basics, and confidence in academics."
+      ],
+      "forEducation": true,
+      "enabled": true,
+      "_id": "65f1fe900556c3f887e9db94"
+    },
+    
+    {
+      "company_name": "RNY Clothing - E-commerce platform for trendy apparel",
+      "summary": "Contributed to the development of a full-stack web application supporting product listings, user interactions, and business workflows.",
+      "sequence": 3,
+      "startDate": "2023-10-11T00:00:00.000Z",
+      "endDate": "2024-03-28T00:00:00.000Z",
+      "jobTitle": "Software Developer Intern",
+      "jobLocation": "Jaipur, India",
+      "bulletPoints": [
+        "Developed a full-stack web application with dynamic React-based user interfaces",
+        "Implemented responsive design principles to ensure optimal user experience across devices",
+
+"Built separate user and admin dashboards to manage products, orders, and users",
+
+"Implemented server-side logic using Node.js and Express, exposing RESTful APIs",
+
+"Designed and managed database schemas to support scalable data storage and queries",
+"Integrated frontend components with backend services, handling authentication and state updates"
+      ],
+      "forEducation": false,
+      "enabled": true,
+      "_id": "65f1fe1e0556c3f887e9dab2"
+    },
+    {
+      "company_name": "",
+      "summary": "Higher Secondary Education, Central Board of Secondary Education (CBSE)",
+      "sequence": 2,
+      "startDate": "2021-03-13T00:00:00.000Z",
+      "endDate": "2022-04-22T00:00:00.000Z",
+      "jobTitle": "Modern Delhi Public School",
+      "jobLocation": " New Delhi, India",
+      "bulletPoints": [
+        "Developed discipline, time management, and exam-focused preparation under academic pressure.",
+        "Strengthened logical reasoning and consistency through rigorous coursework."
+      ],
+      "forEducation": true,
+      "enabled": true,
+      "_id": "65f1fdef0556c3f887e9da44"
+    },
+    {
+      "company_name": "Quratr - AI-powered place discovery platform",
+      "summary": "Contributed to the development of a cloud-based SaaS platform focused on AI-driven place discovery and user engagement.\n",
+      "sequence": 1,
+      "icon": {
+        "public_id": "portfolio3/1710357917833-0mic4.png",
+        "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357917833-0mic4.png"
+      },
+      "startDate": "2024-01-03T00:00:00.000Z",
+      "endDate": "2024-03-08T00:00:00.000Z",
+      "jobTitle": "Software Developer Intern",
+      "jobLocation": " New Delhi, India",
+      "bulletPoints": [
+          "Developed a full-stack web application using React for the frontend and Node.js, Express for the backend.",
+          " Designed and implemented RESTful APIs supporting end-to-end CRUD operations.",
+          " Performed database design and data modeling using MongoDB for efficient data storage and querying.",
+          " Integrated frontend components with backend APIs, managing asynchronous data flows and state updates.",
+          " Tested and debugged APIs using Postman to ensure reliability and correctness."
+      ],
+      "forEducation": false,
+      "enabled": true,
+      "_id": "65f1fd9e0556c3f887e9d9d8"
+    },
+    {
+      "company_name": "",
+      "summary": "B.Tech in Electronics and Communication Engineering",
+      "sequence": 1,
+      "icon": {
+        "public_id": "1706289470834-siro83",
+        "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/1706289470834-siro83"
+      },
+      "startDate": "2023-08-13T00:00:00.000Z",
+      "endDate": "2027-07-25T00:00:00.000Z",
+      "jobTitle": "Birla Institute of Technology",
+      "jobLocation": "Ranchi, India",
+      "bulletPoints": [
+        "Built a strong foundation in problem-solving, software development, and analytical thinking.",
+        "Worked on projects that improved my ability to learn fast and apply concepts in real scenarios."
+      ],
+      "forEducation": true,
+      "enabled": true,
+      "_id": "65b3e93feb20546ae6d46369"
+    }
+  ],
+  "skills": [
+    {
+      "enabled": true,
+      "name": "HTML",
+      "sequence": 1,
+      "percentage": 98,
+      "image": {
+        "public_id": "html5",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+      },
+      "_id": "65b3dbeba5c8d2db7b6164bc"
+    },
+    {
+      "enabled": true,
+      "name": "CSS",
+      "sequence": 2,
+      "percentage": 97,
+      "image": {
+        "public_id": "css3",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+      },
+      "_id": "65b3dcc1b48589dfcae17e4d"
+    },
+    {
+      "enabled": true,
+      "name": "JavaScript",
+      "sequence": 3,
+      "percentage": 95,
+      "image": {
+        "public_id": "javascript",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+      },
+      "_id": "65b3df24b48589dfcae18114"
+    },
+    {
+      "enabled": true,
+      "name": "TypeScript",
+      "sequence": 4,
+      "percentage": 90,
+      "image": {
+        "public_id": "typescript",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+      },
+      "_id": "65b3e001b48589dfcae18245"
+    },
+    {
+      "enabled": true,
+      "name": "React",
+      "sequence": 5,
+      "percentage": 90,
+      "image": {
+        "public_id": "react",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+      },
+      "_id": "65b3de41b48589dfcae17fbd"
+    },
+    {
+      "enabled": true,
+      "name": "Next.js",
+      "sequence": 6,
+      "percentage": 90,
+      "image": {
+        "public_id": "nextjs",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+      },
+      "_id": "65b3de5bb48589dfcae17fe8"
+    },
+    {
+      "enabled": true,
+      "name": "Node.js",
+      "sequence": 7,
+      "percentage": 92,
+      "image": {
+        "public_id": "nodejs",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+      },
+      "_id": "65b3df8fb48589dfcae18204"
+    },
+    {
+      "enabled": true,
+      "name": "Tailwind CSS",
+      "sequence": 8,
+      "percentage": 99,
+      "image": {
+        "public_id": "tailwind",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+      },
+      "_id": "65b3de19b48589dfcae17f94"
+    },
+    {
+      "enabled": true,
+      "name": "Redux",
+      "sequence": 9,
+      "percentage": 95,
+      "image": {
+        "public_id": "redux",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg"
+      },
+      "_id": "65b3df41b48589dfcae1814d"
+    },
+    {
+      "enabled": true,
+      "name": "MongoDB",
+      "sequence": 10,
+      "percentage": 70,
+      "image": {
+        "public_id": "mongodb",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+      },
+      "_id": "65b3df76b48589dfcae181c5"
+    },
+    {
+      "enabled": true,
+      "name": "Git",
+      "sequence": 11,
+      "percentage": 95,
+      "image": {
+        "public_id": "git",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+      },
+      "_id": "65b3defbb48589dfcae180dd"
+    },
+    {
+      "enabled": true,
+      "name": "GitHub",
+      "sequence": 12,
+      "percentage": 95,
+      "image": {
+        "public_id": "github",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+      },
+      "_id": "65b3dee5b48589dfcae180a8"
+    },
+    {
+      "enabled": true,
+      "name": "Python",
+      "sequence": 13,
+      "percentage": 86,
+      "image": {
+        "public_id": "python",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+      },
+      "_id": "65b3e645b48589dfcae187a2"
+    },
+    {
+      "enabled": true,
+      "name": "C++",
+      "sequence": 14,
+      "percentage": 87,
+      "image": {
+        "public_id": "cplusplus",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+      },
+      "_id": "65b3e661b48589dfcae187f7"
+    },
+    {
+      "enabled": true,
+      "name": "Docker",
+      "sequence": 15,
+      "percentage": 85,
+      "image": {
+        "public_id": "docker",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+      },
+      "_id": "65b3e034b48589dfcae182cd"
+    },
+    {
+      "enabled": true,
+      "name": "Figma",
+      "sequence": 16,
+      "percentage": 95,
+      "image": {
+        "public_id": "figma",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+      },
+      "_id": "65b3e023b48589dfcae18288"
+    },
+    {
+      "enabled": true,
+      "name": "Sass",
+      "sequence": 17,
+      "percentage": 95,
+      "image": {
+        "public_id": "sass",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg"
+      },
+      "_id": "65b3debcb48589dfcae18075"
+    },
+    {
+      "enabled": true,
+      "name": "GraphQL",
+      "sequence": 18,
+      "percentage": 80,
+      "image": {
+        "public_id": "graphql",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg"
+      },
+      "_id": "65b3dea8b48589dfcae18044"
+    },
+    {
+      "enabled": true,
+      "name": "Three.js",
+      "sequence": 19,
+      "percentage": 70,
+      "image": {
+        "public_id": "threejs",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg"
+      },
+      "_id": "65b3df5db48589dfcae18188"
+    },
+    {
+      "enabled": true,
+      "name": "Vercel",
+      "sequence": 20,
+      "percentage": 90,
+      "image": {
+        "public_id": "vercel",
+        "url": "https://www.svgrepo.com/show/327408/logo-vercel.svg"
+      },
+      "_id": "65b3de89b48589dfcae18015"
+    }
+  ],
+  "youtube": [
+    {
+      "url": "",
+      "title": "Sample Video",
+      "sequence": 1,
+      "image": null,
+      "embedId": "eitWM4gNZoM",
+      "enabled": true,
+      "_id": "65f482e5d689e5777d9457ae"
+    }
+  ],
+  "projects": [
+    {
+      "liveurl": "https://playmuzi.vercel.app/",
+      "githuburl": "https://github.com/bhavayb/muzi",
+      "title": "Muzi - Interactive Music Collaboration Platform",
+      "sequence": 14,
+      "image": {
+        "public_id": "1706285511679-xe7r9t",
+        "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/1706285511679-xe7r9t"
+      },
+      "description": "Built a music streaming SaaS platform that enables democratic, real-time song selection for groups and live audiences. Users can add YouTube tracks to a shared queue, upvote songs to influence playback order, and view the currently playing track with automatic de-duplication to prevent repeats. Implemented secure Google authentication, REST APIs for stream and vote management, and a relational database schema to track users, queues, and upvotes. Integrated YouTube APIs for metadata retrieval and used long polling to keep the queue and playback state in sync across users. Deployed the application on Vercel with a managed PostgreSQL database. ",
+      "techStack": ["TypeScript","Nextjs ", " NextOuth", " PostgreSQL ", " Docker", "Prisma"],
+      "_id": "65b3d9c8d017f6b49c778ca7",
+      "enabled": true
+    },
+    {
+      "liveurl": "#",
+      "githuburl": "#",
+      "title": "Project 14",
+      "sequence": 15,
+      "image": {
+        "public_id": "1706285468702-igx05q",
+        "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/1706285468702-igx05q"
+      },
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+      "techStack": ["Reactjs ", " Nextjs ", " Mern ", " CSS"],
+      "_id": "65b3d99dd017f6b49c778c86",
+      "enabled": true
+    },
+    {
+      "liveurl": "https://getsnapprice.vercel.app/",
+      "githuburl": "https://github.com/bhavayb/snapprice",
+      "title": "Deal Drop - Price Tracker & Notification System",
+      "sequence": 13,
+      "image": {
+        "public_id": "1706285431821-3lfg2r",
+        "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/1706285431821-3lfg2r"
+      },
+      "description": "Built a full-stack Next.js app with server-side rendering, web scraping, and interactive graphs. Implemented REST APIs for CRUD operations, designed a PostgreSQL database for products and historical price tracking with user-level access control, and added background jobs to monitor price changes and trigger automated notifications.",
+      "techStack": ["Javascript","Next.js ", " PostgreSQL ", " Web scraping ", " REST APIs", "Resend",  " Tailwind CSS"],
+      "_id": "65b3d978d017f6b49c778c67",
+      "enabled": true
+    },
+    {
+      "liveurl": "#",
+      "githuburl": "#",
+      "title": "Project 12",
+      "sequence": 12,
+      "image": {
+        "public_id": "1706285416017-wra7swm",
+        "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/1706285416017-wra7swm"
+      },
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+      "techStack": ["Reactjs ", " Nextjs ", " Mern ", " CSS"],
+      "_id": "65b3d969d017f6b49c778c4a",
+      "enabled": true
+    }
+  ],
+  "social_handles": [
+    {
+      "platform": "Leetcode",
+      "url": "https://leetcode.com/u/bhavay_b/",
+      "image": {
+        "public_id": "leetcode",
+        "url": "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/leetcode.svg"
+      },
+      "enabled": true,
+      "_id": "65b3ea4feb20546ae6d4641d"
+    },
+    {
+      "platform": "LinkedIn",
+      "url": "https://www.linkedin.com/in/bhavay-batra-34b7a42a5/",
+      "image": {
+        "public_id": "linkedin",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
+      },
+      "enabled": true,
+      "_id": "65b3e99beb20546ae6d463c2"
+    },
+    {
+      "enabled": true,
+      "platform": "X (Twitter)",
+      "url": "https://x.com/BhavayXBatra",
+      "image": {
+        "public_id": "twitter",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg"
+      },
+      "_id": "65b3e47cb48589dfcae185bd"
+    },
+    {
+      "enabled": true,
+      "platform": "Github",
+      "url": "https://github.com/bhavayb",
+      "image": {
+        "public_id": "github",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+      },
+      "_id": "65b3e43cb48589dfcae1856c"
+    }
+  ],
+  "services": [
+    {
+      "name": "App Development",
+      "charge": "",
+      "desc": "I build cross-platform mobile applications using React Native. Focused on clean architecture, smooth performance, and scalable features that adapt as the product grows.",
+      "enabled": true,
+      "_id": "65f1fd690556c3f887e9d94a",
+      "image": {
+        "public_id": "portfolio3/1710364293287-4q1ngo.webp",
+        "url": ""
+      }
+    },
+    {
+      "name": "Web Applications",
+      "charge": "",
+      "desc": "I build full-stack web applications using Next.js, Node.js, and PostgreSQL. Designed for performance, scalability, and real-world product use.",
+      "image": {
+        "public_id": "portfolio3/1710357775748-9vwq4q.jpeg",
+        "url": ""
+      },
+      "enabled": true,
+      "_id": "65f1fd100556c3f887e9d87b"
+    },
+    {
+      "name": "Strategy Consultant - side gig :)",
+      "charge": "",
+      "desc": "I work with founders and teams on product thinking, system design, and go-to-market clarity with a practical, execution-first approach.",
+      "image": {
+        "public_id": "portfolio3/1710357752227-6f5trs.jpeg",
+        "url": ""
+      },
+      "_id": "65b3e2a6b48589dfcae183f2",
+      "enabled": true
+    }
+  ],
+  "testimonials": [
+    {
+      "image": {
+        "public_id": "portfolio3/1710357726628-c4dr18.png",
+        "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357726628-c4dr18.png"
+      },
+      "name": "Samantha Wu",
+      "review": "I had the pleasure of working closely with John on a challenging project. He is a highly skilled developer who consistently delivered excellent results. His ability to understand complex requirements and implement efficient solutions was truly impressive. I would highly recommend him to any organization looking for a talented developer.",
+      "position": "Software Engineer",
+      "enabled": true,
+      "_id": "65f1fcdf0556c3f887e9d74c"
+    },
+    {
+      "image": {
+        "public_id": "portfolio3/1710357705657-aimydg.png",
+        "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357705657-aimydg.png"
+      },
+      "name": "David Rodriguez",
+      "review": "Throughout our project, John demonstrated exceptional technical skills and a strong work ethic. He consistently met deadlines and produced high-quality code that exceeded our expectations. His proactive approach to problem-solving and effective communication made him a valuable member of our team\n",
+      "position": "Project Manager",
+      "enabled": true,
+      "_id": "65f1fcca0556c3f887e9d6e8"
+    },
+    {
+      "image": {
+        "public_id": "portfolio3/1710357683739-tqeav.png",
+        "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357683739-tqeav.png"
+      },
+      "name": " Emily Chen",
+      "review": "I had the pleasure of collaborating with John on a complex web application project. His ability to translate design concepts into functional, user-friendly features was impressive. John consistently delivered high-quality work and was always open to feedback. I look forward to working with him again in the future.\n\n",
+      "position": " Emily Chen",
+      "enabled": true,
+      "_id": "65f1fcb30556c3f887e9d662"
+    },
+    {
+      "image": {
+        "public_id": "portfolio3/1710357647030-pi5cis.png",
+        "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357647030-pi5cis.png"
+      },
+      "name": " Michael Lee",
+      "review": "John is a skilled developer with a keen eye for detail. He played a crucial role in our team, consistently producing clean, efficient code. His collaborative nature and willingness to take on new challenges make him an invaluable asset to any project.\"",
+      "position": " Lead Developer",
+      "enabled": true,
+      "_id": "65f1fc8f0556c3f887e9d4e5"
+    },
+    {
+      "image": {
+        "public_id": "portfolio3/1710357534893-2s9b5d.png",
+        "url": "https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357534893-2s9b5d.png"
+      },
+      "name": "Sarah Johnson",
+      "review": "Working with John was an absolute delight. Their professionalism and technical prowess were evident from day one. He consistently delivered top-notch code and went above and beyond to ensure the success of our project. I highly recommend him for any development endeavor",
+      "position": " Product Manager",
+      "enabled": true,
+      "_id": "65f1fc1f0556c3f887e9d31d"
+    }
+  ],
+  "createdAt": "2024-01-26T12:14:36.514Z",
+  "updatedAt": "2024-05-08T17:53:29.758Z",
+  "__v": 74,
+  "refreshToken": ""
+}
