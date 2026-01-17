@@ -5,39 +5,33 @@ import { motion } from "motion/react";
 import { cn } from "../../utils/cn";
 
 interface ParallaxProps {
-  children: ReactNode;
+  children: string;
   baseVelocity: number;
-  className?: string;
-  wrapperClassName?: string;
+  animationDirection?: "normal" | "reverse"; // Renamed prop
 }
 
-export function ParallaxText({
-  children,
-  baseVelocity,
-  className,
-  wrapperClassName,
+function ParallaxText({ 
+  children, 
+  baseVelocity = 100, 
+  animationDirection = "normal" 
 }: ParallaxProps) {
-  // Calculate duration based on velocity (lower velocity = longer duration = slower)
-  const duration = Math.abs(40 / baseVelocity);
-  const direction = baseVelocity < 0 ? "normal" : "reverse";
+  // ... rest of your code ...
 
   return (
-    <div className={cn("w-full overflow-hidden", wrapperClassName)}>
+    <div className="parallax">
       <motion.div
-        className={cn(
-          "flex items-center gap-4 md:py-3 py-1",
-          className
-        )}
-        animate={{ x: ["0%", "-50%"] }}
+        className="scroller"
+        animate={{
+          x: animationDirection === "normal" ? ["0%", "-50%"] : ["-50%", "0%"],
+        }}
         transition={{
           x: {
             repeat: Infinity,
             repeatType: "loop",
-            duration: duration,
+            duration: 20,
             ease: "linear",
           },
         }}
-        style={{ direction }}
       >
         {children}
         {children}
@@ -45,4 +39,3 @@ export function ParallaxText({
     </div>
   );
 }
-
