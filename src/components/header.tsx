@@ -56,8 +56,8 @@ const Header = ({ social }: HeaderProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href={"/"} className="text-sm sm:text-base font-bold bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-400 bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(6,182,212,0.25)]">
-              ThePortfolio
+            <Link href={"/"} className="text-base sm:text-lg md:text-xl font-bold font-[family-name:var(--font-stylish)] bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-400 bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(6,182,212,0.25)]">
+              Bhavay Batra
             </Link>
 
             {/* Desktop Navigation */}
@@ -126,7 +126,7 @@ const Header = ({ social }: HeaderProps) => {
       <motion.header className="hidden md:block fixed top-0 md:mt-12 md:mr-12 right-0 z-20">
         <Transition className="fixed top-4 sm:top-6 md:top-8 left-4 sm:left-6 md:left-8 z-30">
           <Link href={"/"}>
-            <TextReveal className="font-semibold text-sm sm:text-base">ThePortfolio</TextReveal>
+            <TextReveal className="font-semibold text-base sm:text-lg md:text-xl font-[family-name:var(--font-stylish)]">Bhavay Batra</TextReveal>
           </Link>
         </Transition>
         <motion.div

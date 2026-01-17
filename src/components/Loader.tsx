@@ -189,8 +189,8 @@ const Loader = ({ setHideLoader }: PageLoadProps) => {
           transition={{ delay: 0.3 }}
           className="mt-6 sm:mt-8 text-center"
         >
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-500 bg-clip-text text-transparent">
-            ThePortfolio
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-[family-name:var(--font-stylish)] bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-500 bg-clip-text text-transparent">
+            Bhavay Batra
           </h1>
           <p className="text-gray-500 text-[10px] sm:text-xs mt-1">Crafting digital experiences</p>
         </motion.div>
