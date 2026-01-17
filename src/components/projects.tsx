@@ -26,7 +26,7 @@ const projectsData: Project[] = [
     image: "/muzi.png",
     description: "Built a music streaming SaaS platform that enables democratic, real-time song selection for groups and live audiences. Users can add YouTube tracks to a shared queue, upvote songs to influence playback order, and view the currently playing track with automatic de-duplication to prevent repeats. Implemented secure Google authentication, REST APIs for stream and vote management, and a relational database schema to track users, queues, and upvotes. Integrated YouTube APIs for metadata retrieval and used long polling to keep the queue and playback state in sync across users. Deployed the application on Vercel with a managed PostgreSQL database.",
     techStack: ["TypeScript", "Next.js", "NextAuth", "PostgreSQL", "Docker", "Prisma"],
-    _id: "65b3d9c8d017f6b49c778ca7",
+    _id: "project-1",
     enabled: true
   },
   {
@@ -37,7 +37,7 @@ const projectsData: Project[] = [
     image: "/dealdrop.png",
     description: "Built a full-stack Next.js app with server-side rendering, web scraping, and interactive graphs. Implemented REST APIs for CRUD operations, designed a PostgreSQL database for products and historical price tracking with user-level access control, and added background jobs to monitor price changes and trigger automated notifications.",
     techStack: ["JavaScript", "Next.js", "PostgreSQL", "Web Scraping", "REST APIs", "Resend", "Tailwind CSS"],
-    _id: "65b3d978d017f6b49c778c67",
+    _id: "project-2",
     enabled: true
   },
   {
@@ -48,7 +48,7 @@ const projectsData: Project[] = [
     image: "/truefeedback.png",
     description: "Built TrueFeedback, a full-stack anonymous messaging platform using Next.js with server-side rendering, Node.js, and MongoDB. Implemented credential-based authentication with OTP verification, secure session management, and REST APIs for user and message workflows. Designed a scalable messaging system using MongoDB aggregation pipelines for efficient querying and cleanup. Integrated AI-powered message suggestions with streaming responses and developed reusable, validated UI components with debounced inputs.",
     techStack: ["TypeScript", "Next.js", "MongoDB", "REST APIs", "Gemini AI", "Tailwind CSS"],
-    _id: "65b3d978d017f6b49c778c67",
+    _id: "project-3",
     enabled: true
   },
   {
@@ -57,9 +57,9 @@ const projectsData: Project[] = [
     title: "180DC - BIT Mesra",
     sequence: 13,
     image: "/image.png",
-    description: "Designed and developed a college project for 180 Degrees Consulting BIT Mesra, building the organization’s official website from scratch. Created a responsive React-based frontend with a clean layout and smooth navigation. Translated team requirements into a functional, production-ready site suitable for public use. Focused on performance, accessibility, and overall user experience throughout development.",
+    description: "Designed and developed a college project for 180 Degrees Consulting BIT Mesra, building the organization's official website from scratch. Created a responsive React-based frontend with a clean layout and smooth navigation. Translated team requirements into a functional, production-ready site suitable for public use. Focused on performance, accessibility, and overall user experience throughout development.",
     techStack: ["JavaScript", "React.js", "MongoDB", "Cloudinary", "REST APIs", "Vercel", "Tailwind CSS"],
-    _id: "65b3d978d017f6b49c778c67",
+    _id: "project-4",
     enabled: true
   },
   {
@@ -70,11 +70,10 @@ const projectsData: Project[] = [
     image: "/rny.png",
     description: "Built RNY Clothing during my internship, a full-stack e-commerce web application using Next.js, React, Node.js, and MongoDB. Implemented responsive product listings, user authentication, and cart and order management with RESTful APIs. Designed and managed scalable database schemas for products, users, and orders. Developed separate user and admin dashboards to handle product management, orders, and users, with secure backend logic and state-driven frontend updates.",
     techStack: ["JavaScript", "React.js", "MongoDB", "Cloudinary", "REST APIs", "Vercel", "Tailwind CSS"],
-    _id: "65b3d978d017f6b49c778c67",
+    _id: "project-5",
     enabled: true
   }
 ];
-
 function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
