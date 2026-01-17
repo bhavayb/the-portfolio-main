@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Skill } from "../utils/interface";
-import { ParallaxText } from "./ui/ParallaxText";
+import { motion } from "framer-motion";
 
 interface SkillsProps {
   skills: Skill[];
@@ -27,22 +27,26 @@ const prioritySkills = [
 function Skills({ skills }: SkillsProps) {
   // Sort skills: priority skills first, then the rest
   const sortedSkills = [...skills].sort((a, b) => {
-    const aIndex = prioritySkills.findIndex(p => 
+    const aIndex = prioritySkills.findIndex(p =>
       a.name.toLowerCase().includes(p.toLowerCase())
     );
-    const bIndex = prioritySkills.findIndex(p => 
+    const bIndex = prioritySkills.findIndex(p =>
       b.name.toLowerCase().includes(p.toLowerCase())
     );
-    
-    // If both are priority skills, sort by priority order
+
     if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
-    // If only a is priority, it comes first
     if (aIndex !== -1) return -1;
-    // If only b is priority, it comes first
     if (bIndex !== -1) return 1;
-    // Otherwise keep original order
     return 0;
   });
+
+  // Deduplicate by name and filter enabled
+  const uniqueMap = new Map<string, Skill>();
+  for (const s of sortedSkills) {
+    const key = s.name.trim().toLowerCase();
+    if (!uniqueMap.has(key) && s.enabled) uniqueMap.set(key, s);
+  }
+  const enabledSkills = Array.from(uniqueMap.values());
 
   return (
     <section id="skills" className="py-16 sm:py-20 md:py-24 overflow-hidden bg-gradient-to-b from-transparent via-purple-950/10 to-transparent">
@@ -54,31 +58,44 @@ function Skills({ skills }: SkillsProps) {
         <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-cyan-500 to-cyan-400 mx-auto rounded-full mb-3 sm:mb-4" />
         <p className="text-gray-400 text-base sm:text-lg">Technologies I work with</p>
       </div>
-      <ParallaxText baseVelocity={-3}>
-        {sortedSkills.map((skill) =>
-          skill.enabled ? (
+
+      {/* Marquee - single list (no duplicate items), uniform spacing and fixed widths to avoid overlap */}
+      <div className="overflow-hidden w-full">
+        <motion.div
+          className="flex flex-nowrap gap-8 md:gap-12 items-start"
+          initial={{ x: "100%" }}
+          animate={{ x: "-100%" }}
+          transition={{
+            duration: Math.max(24, enabledSkills.length * 2), // duration scales with count, tweak as needed
+            ease: "linear",
+            repeat: Infinity,
+          }}
+        >
+          {enabledSkills.map((skill) => (
             <div
               key={skill._id}
-              className="inline-flex flex-col items-center mx-4 sm:mx-6 md:mx-8 lg:mx-12 group"
+              className="flex flex-col items-center justify-start flex-shrink-0 group w-[120px] sm:w-[140px] md:w-[160px]"
             >
-              <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-18 md:h-18 lg:w-20 lg:h-20 xl:w-24 xl:h-24 p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-br from-cyan-600/10 to-cyan-500/10 border border-cyan-600/30 backdrop-blur-sm group-hover:bg-transparent group-hover:from-cyan-600/12 group-hover:to-cyan-500/12 group-hover:border-cyan-500/60 group-hover:scale-105 transition-all duration-300 shadow-md group-hover:shadow-lg group-hover:shadow-cyan-600/20">
-                <Image
-                  src={skill.image.url}
-                  alt={skill.name}
-                  fill
-                  className="object-contain p-1.5 sm:p-2"
-                />
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-cyan-600/10 to-cyan-500/10 border border-cyan-600/30 backdrop-blur-sm group-hover:bg-transparent group-hover:border-cyan-500/60 group-hover:scale-105 transition-all duration-300 shadow-md flex items-center justify-center p-3">
+                <div className="relative w-full h-full">
+                  <Image
+                    src={skill.image.url}
+                    alt={skill.name}
+                    fill
+                    className="object-contain"
+                    sizes="96px"
+                  />
+                </div>
               </div>
-              <span className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base font-semibold text-white/75 group-hover:text-white transition-colors text-center max-w-[80px] sm:max-w-none truncate">
+              <span className="mt-3 text-sm font-semibold text-white/80 group-hover:text-white transition-colors text-center w-full px-2 overflow-hidden text-ellipsis whitespace-nowrap">
                 {skill.name}
               </span>
             </div>
-          ) : null
-        )}
-      </ParallaxText>
+          ))}
+        </motion.div>
+      </div>
     </section>
   );
 }
 
 export default Skills;
-

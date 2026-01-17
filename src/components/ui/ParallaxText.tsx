@@ -1,67 +1,72 @@
-"use client"; // Add this if using Next.js App Router
+"use client";
 
-import { motion, useScroll, useSpring, useTransform, useMotionValue, useVelocity, useAnimationFrame } from "framer-motion";
-import { useRef } from "react";
+import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
+import { useRef, useLayoutEffect, useState } from "react";
 
 interface ParallaxProps {
-  children: string;
-  baseVelocity: number;
-  animationDirection?: "normal" | "reverse";
+  children: React.ReactNode;
+  baseVelocity?: number;
+  direction?: "left" | "right";
+  gap?: number;
+  copies?: number; // Number of copies to render
 }
 
-// Add 'export' here
-export function ParallaxText({ 
-  children, 
-  baseVelocity = 100, 
-  animationDirection = "normal" 
+export function ParallaxText({
+  children,
+  baseVelocity = 40,
+  direction = "left",
+  gap = 48,
+  copies = 3,
 }: ParallaxProps) {
-  const baseX = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const scrollVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(scrollVelocity, {
-    damping: 50,
-    stiffness: 400
-  });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
-    clamp: false
-  });
+  const x = useMotionValue(0);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [contentWidth, setContentWidth] = useState(0);
 
-  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+  // Measure the width of a single copy (including gap) and set initial centered offset
+  useLayoutEffect(() => {
+    if (contentRef.current) {
+      const singleWidth = contentRef.current.offsetWidth + gap;
+      setContentWidth(singleWidth);
 
-  const directionFactor = useRef<number>(1);
-  useAnimationFrame((t, delta) => {
-    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+      // Start from the middle of a copy so marquee appears "from between"
+      const initial = direction === "left" ? -singleWidth / 2 : singleWidth / 2;
+      x.set(initial);
+    }
+    // depend on children/gap/direction
+  }, [children, gap, direction, x]);
 
-    if (velocityFactor.get() < 0) {
-      directionFactor.current = -1;
-    } else if (velocityFactor.get() > 0) {
-      directionFactor.current = 1;
+  // Animate the scrolling with seamless wrap
+  useAnimationFrame((_, delta) => {
+    if (!contentWidth) return;
+
+    const dir = direction === "left" ? -1 : 1;
+    const moveBy = (baseVelocity * delta) / 1000;
+    let newX = x.get() + dir * moveBy;
+
+    // Wrap seamlessly (keeps visual continuity)
+    if (direction === "left") {
+      if (newX <= -contentWidth) newX += contentWidth;
+    } else {
+      if (newX >= contentWidth) newX -= contentWidth;
     }
 
-    moveBy += directionFactor.current * moveBy * velocityFactor.get();
-
-    baseX.set(baseX.get() + moveBy);
+    x.set(newX);
   });
 
   return (
-    <div className="parallax overflow-hidden whitespace-nowrap flex flex-nowrap">
-      <motion.div
-        className="scroller flex whitespace-nowrap flex-nowrap gap-4"
-        style={{ x }}
-      >
-        {children}
-        {children}
-        {children}
-        {children}
+    <div className="overflow-hidden w-full">
+      <motion.div className="flex flex-nowrap" style={{ x }}>
+        {Array.from({ length: copies }).map((_, index) => (
+          <div
+            key={index}
+            ref={index === 0 ? contentRef : null}
+            className="flex flex-nowrap flex-shrink-0"
+            style={{ gap: `${gap}px`, marginRight: `${gap}px` }}
+          >
+            {children}
+          </div>
+        ))}
       </motion.div>
     </div>
   );
 }
-
-function wrap(min: number, max: number, v: number) {
-  const rangeSize = max - min;
-  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
-}
-
-// Or use default export
-// export default ParallaxText;
