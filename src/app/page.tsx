@@ -34,7 +34,7 @@ export default async function Home() {
       <WorkExperience />
       <Skills skills={skills} />
       <Projects />
-      <Services services={services} />
+      {/* <Services services={services} /> */}
       <Timeline timeline={timeline} />
       <Contact email={email} social_handle={social_handles} about={about} />
     </main>

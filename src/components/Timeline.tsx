@@ -15,10 +15,9 @@ const Timeline = ({ timeline }: ExperienceProps) => {
     .sort((a, b) => a.sequence - b.sequence);
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" id="education">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-950/5 to-transparent pointer-events-none" />
-      
+    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8" id="education">
+      {/* Background - static on mobile */}
+      <div className="hidden sm:block absolute inset-0 bg-gradient-to-b from-transparent via-cyan-950/5 to-transparent pointer-events-none" />
       <div className="max-w-4xl mx-auto relative">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
@@ -33,8 +32,8 @@ const Timeline = ({ timeline }: ExperienceProps) => {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical Line */}
-          <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500 via-cyan-500/50 to-transparent" />
+          {/* Vertical Line - static on mobile */}
+          <div className="hidden sm:block absolute left-4 sm:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500 via-cyan-500/50 to-transparent" />
 
           {/* Education Items */}
           <div className="space-y-8 sm:space-y-12">

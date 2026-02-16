@@ -63,8 +63,8 @@ const WorkExperience = () => {
   const experience = experienceData.sort((a, b) => a.sequence - b.sequence);
 
   return (
-    <section className="py-20 px-4 md:px-8 relative bg-gradient-to-b from-transparent via-purple-950/5 to-transparent" id="experience">
-      <span className="blob absolute top-[20%] right-0 w-1/3 h-5/6 blur-[100px] rotate-180 -z-10 opacity-30" />
+    <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-transparent via-purple-950/5 to-transparent" id="experience">
+      <span className="blob hidden sm:absolute sm:top-[20%] sm:right-0 sm:w-1/3 sm:h-5/6 sm:blur-[100px] sm:rotate-180 sm:-z-10 sm:opacity-30" />
       <div className="text-center mb-16">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-400 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_18px_rgba(6,182,212,0.25)]">
           Work <span className="text-cyan-400">Experience</span>
@@ -74,8 +74,8 @@ const WorkExperience = () => {
       </div>
 
       <div className="max-w-5xl mx-auto relative">
-        {/* Vertical Timeline Line */}
-        <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-400 via-cyan-500 to-transparent" />
+        {/* Vertical Timeline Line - static on mobile */}
+        <div className="hidden sm:block absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-400 via-cyan-500 to-transparent" />
 
         {experience.map((exp, index) => (
           <Transition key={exp._id} className="relative mb-16 last:mb-0">

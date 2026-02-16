@@ -27,12 +27,9 @@ const socialIcons: Record<string, string> = {
 };
 
 const Contact = ({ email, social_handle, about }: ContactProps) => {
-  const [status, setStatus] = useState<"SENDING" | "DONE" | "ERROR" | "IDLE">(
-    "IDLE"
-  );
+  const [status, setStatus] = useState<"SENDING" | "DONE" | "ERROR" | "IDLE">("IDLE");
   const [statusText, setStatusText] = useState("");
   const [activeField, setActiveField] = useState<string | null>(null);
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -285,160 +282,65 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
               <Transition>
                 <motion.form
                   onSubmit={handleSubmit}
-                  className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 backdrop-blur-sm"
+                  className="p-4 sm:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm shadow-md max-w-full"
+                  style={{ boxSizing: 'border-box' }}
                 >
-                  <h3 className="text-2xl font-bold text-white mb-2">Send a Message</h3>
-                  <p className="text-gray-400 mb-8">Fill out the form below and I&apos;ll get back to you as soon as possible.</p>
-
-                  <div className="space-y-6">
-                    <div className="grid sm:grid-cols-2 gap-6">
-                      {/* Name Input */}
-                      <div className="relative">
-                        <motion.div
-                          animate={{ 
-                            borderColor: activeField === "name" ? "rgba(6, 182, 212, 0.5)" : "rgba(255, 255, 255, 0.1)"
-                          }}
-                          className="relative rounded-xl border bg-white/5 overflow-hidden"
-                        >
-                          <input
-                            id="name"
-                            name="name"
-                            type="text"
-                            placeholder="Your name"
-                            required
-                            value={formData.name}
-                            onChange={handleInputChange}
-                            onFocus={() => setActiveField("name")}
-                            onBlur={() => setActiveField(null)}
-                            className="w-full px-4 py-4 bg-transparent text-white placeholder:text-gray-500 focus:outline-none"
-                          />
-                          {activeField === "name" && (
-                            <motion.div
-                              layoutId="activeIndicator"
-                              className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500"
-                            />
-                          )}
-                        </motion.div>
-                      </div>
-
-                      {/* Email Input */}
-                      <div className="relative">
-                        <motion.div
-                          animate={{ 
-                            borderColor: activeField === "email" ? "rgba(6, 182, 212, 0.5)" : "rgba(255, 255, 255, 0.1)"
-                          }}
-                          className="relative rounded-xl border bg-white/5 overflow-hidden"
-                        >
-                          <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            placeholder="Your email"
-                            required
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            onFocus={() => setActiveField("email")}
-                            onBlur={() => setActiveField(null)}
-                            className="w-full px-4 py-4 bg-transparent text-white placeholder:text-gray-500 focus:outline-none"
-                          />
-                          {activeField === "email" && (
-                            <motion.div
-                              layoutId="activeIndicator"
-                              className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500"
-                            />
-                          )}
-                        </motion.div>
-                      </div>
-                    </div>
-
-                    {/* Subject Input */}
-                    <motion.div
-                      animate={{ 
-                        borderColor: activeField === "subject" ? "rgba(6, 182, 212, 0.5)" : "rgba(255, 255, 255, 0.1)"
-                      }}
-                      className="relative rounded-xl border bg-white/5 overflow-hidden"
-                    >
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">Send a Message</h3>
+                  <p className="text-gray-400 mb-6 text-sm sm:text-base">Fill out the form below and I&apos;ll get back to you as soon as possible.</p>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <input
-                        id="subject"
-                        name="subject"
+                        id="name"
+                        name="name"
                         type="text"
-                        placeholder="Subject"
+                        placeholder="Your name"
                         required
-                        value={formData.subject}
+                        value={formData.name}
                         onChange={handleInputChange}
-                        onFocus={() => setActiveField("subject")}
-                        onBlur={() => setActiveField(null)}
-                        className="w-full px-4 py-4 bg-transparent text-white placeholder:text-gray-500 focus:outline-none"
+                        className="w-full px-3 py-3 rounded-lg border border-white/10 bg-transparent text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm"
                       />
-                      {activeField === "subject" && (
-                        <motion.div
-                          layoutId="activeIndicator"
-                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500"
-                        />
-                      )}
-                    </motion.div>
-
-                    {/* Message Textarea */}
-                    <motion.div
-                      animate={{ 
-                        borderColor: activeField === "message" ? "rgba(6, 182, 212, 0.5)" : "rgba(255, 255, 255, 0.1)"
-                      }}
-                      className="relative rounded-xl border bg-white/5 overflow-hidden"
-                    >
-                      <textarea
-                        id="message"
-                        name="message"
-                        placeholder="Tell me about your project..."
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Your email"
                         required
-                        rows={5}
-                        value={formData.message}
+                        value={formData.email}
                         onChange={handleInputChange}
-                        onFocus={() => setActiveField("message")}
-                        onBlur={() => setActiveField(null)}
-                        className="w-full px-4 py-4 bg-transparent text-white placeholder:text-gray-500 focus:outline-none resize-none"
+                        className="w-full px-3 py-3 rounded-lg border border-white/10 bg-transparent text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm"
                       />
-                      {activeField === "message" && (
-                        <motion.div
-                          layoutId="activeIndicator"
-                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500"
-                        />
-                      )}
-                    </motion.div>
-
-                    {/* Submit Button */}
-                    <motion.button
+                    </div>
+                    <input
+                      id="subject"
+                      name="subject"
+                      type="text"
+                      placeholder="Subject"
+                      required
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-3 rounded-lg border border-white/10 bg-transparent text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm"
+                    />
+                    <textarea
+                      id="message"
+                      name="message"
+                      placeholder="Tell me about your project..."
+                      required
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-3 rounded-lg border border-white/10 bg-transparent text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm resize-none"
+                      style={{ minHeight: 100, maxHeight: 220 }}
+                    />
+                    <button
                       type="submit"
                       disabled={status === "SENDING"}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full relative group py-4 px-8 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold text-lg overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="w-full py-3 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-base transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      <span className="relative z-10 flex items-center justify-center gap-2">
-                        {status === "SENDING" ? (
-                          <>
-                            <motion.div
-                              animate={{ rotate: 360 }}
-                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                              className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
-                            />
-                            Sending...
-                          </>
-                        ) : (
-                          <>
-                            Send Message
-                            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                          </>
-                        )}
-                      </span>
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500"
-                        initial={{ x: "-100%" }}
-                        whileHover={{ x: 0 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </motion.button>
+                      {status === "SENDING" ? "Sending..." : "Send Message"}
+                    </button>
+                    {statusText && (
+                      <p className={`text-center text-sm ${status === "DONE" ? "text-green-400" : "text-red-400"}`}>{statusText}</p>
+                    )}
                   </div>
                 </motion.form>
               </Transition>
@@ -446,21 +348,11 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
           </div>
         </div>
       </div>
-      <footer className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 px-4 sm:px-6 md:px-8 py-4 sm:py-6 text-xs sm:text-sm border-t border-white/5">
-        <Transition>
-          <div className="text-white/70">&copy; {new Date().getFullYear()} <span className="font-[family-name:var(--font-stylish)] text-sm sm:text-base">Bhavay Batra</span></div>
-        </Transition>
-        <Transition>
-          <p className="text-white/70">
-            developed by{" "}
-            <Link
-              href={"https://github.com/bhavayb"}
-              className="hover:underline hover:text-white transition-colors"
-            >
-              Bhavay Batra
-            </Link>
-          </p>
-        </Transition>
+      <footer className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm border-t border-white/10 bg-black/40 mt-8">
+        <div className="text-white/60">&copy; {new Date().getFullYear()} <span className="font-semibold">Bhavay Batra</span></div>
+        <p className="text-white/60">
+          developed by <Link href="https://github.com/bhavayb" className="hover:underline hover:text-white transition-colors">Bhavay Batra</Link>
+        </p>
       </footer>
     </motion.section>
   );
