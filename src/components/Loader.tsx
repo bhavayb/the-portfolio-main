@@ -12,7 +12,7 @@ const Loader = ({ setHideLoader }: PageLoadProps) => {
   const [counter, setCounter] = useState(0);
   const [text, setText] = useState("");
   const isMobile = useMediaQuery("(max-width: 640px)");
-  
+
   const codeLines = [
     "Initializing system...",
     "Loading components...",
@@ -22,12 +22,6 @@ const Loader = ({ setHideLoader }: PageLoadProps) => {
   ];
 
   useEffect(() => {
-    // Skip loader on mobile
-    if (isMobile) {
-      setHideLoader(false);
-      return;
-    }
-    
     const count = setInterval(() => {
       if (counter < 100) {
         setCounter(prev => Math.min(prev + 2, 100));
@@ -37,26 +31,24 @@ const Loader = ({ setHideLoader }: PageLoadProps) => {
     }, 25);
 
     return () => clearInterval(count);
-  }, [counter, isMobile, setHideLoader]);
+  }, [counter, setHideLoader]);
 
   useEffect(() => {
     const lineIndex = Math.min(Math.floor(counter / 20), codeLines.length - 1);
     setText(codeLines[lineIndex]);
   }, [counter]);
 
-  // Don't render loader on mobile
-  if (isMobile) {
-    return null;
-  }
+
+
+  useEffect(() => {
+    if (counter >= 100) {
+      const timeout = setTimeout(() => setHideLoader(false), 600);
+      return () => clearTimeout(timeout);
+    }
+  }, [counter, setHideLoader]);
 
   return (
-    <motion.div
-      initial={{ y: 0 }}
-      animate={{ y: "-100%" }}
-      transition={{ delay: 2.8, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-      onAnimationComplete={() => setHideLoader(false)}
-      className="fixed inset-0 z-[9999] bg-black flex items-center justify-center"
-    >
+    <div className="fixed inset-0 z-[9999] bg-black flex items-center justify-center px-2 py-8 sm:px-4">
       {/* Background grid */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="w-full h-full" style={{
@@ -90,7 +82,7 @@ const Loader = ({ setHideLoader }: PageLoadProps) => {
         ))}
       </div>
 
-      <div className="relative flex flex-col items-center px-4">
+      <div className="relative flex flex-col items-center px-2 w-full max-w-xs sm:max-w-md md:max-w-lg">
         {/* Computer/Laptop SVG */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
@@ -104,7 +96,7 @@ const Loader = ({ setHideLoader }: PageLoadProps) => {
             <div className="absolute -inset-4 bg-cyan-500/20 blur-2xl rounded-3xl" />
             
             {/* Monitor frame */}
-            <div className="relative w-[280px] sm:w-[360px] md:w-[420px] h-[180px] sm:h-[220px] md:h-[260px] bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl sm:rounded-2xl p-2 sm:p-3 border border-gray-700 shadow-2xl">
+            <div className="relative w-[220px] xs:w-[260px] sm:w-[360px] md:w-[420px] h-[120px] xs:h-[150px] sm:h-[220px] md:h-[260px] bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl sm:rounded-2xl p-2 sm:p-3 border border-gray-700 shadow-2xl">
               
               {/* Screen */}
               <div className="w-full h-full bg-[#0a0a0a] rounded-lg overflow-hidden relative">
@@ -164,7 +156,7 @@ const Loader = ({ setHideLoader }: PageLoadProps) => {
         </motion.div>
 
         {/* Loading bar */}
-        <div className="mt-8 sm:mt-10 w-[280px] sm:w-[360px] md:w-[420px]">
+        <div className="mt-6 sm:mt-10 w-[220px] xs:w-[260px] sm:w-[360px] md:w-[420px]">
           <div className="flex justify-between text-[10px] sm:text-xs text-gray-500 mb-2">
             <span>Loading portfolio</span>
             <span className="text-cyan-400 font-mono">{counter}%</span>
@@ -195,7 +187,7 @@ const Loader = ({ setHideLoader }: PageLoadProps) => {
           <p className="text-gray-500 text-[10px] sm:text-xs mt-1">Crafting digital experiences</p>
         </motion.div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

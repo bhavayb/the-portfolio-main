@@ -10,20 +10,11 @@ interface LoaderWrapperProps {
 
 const LoaderWrapper: React.FC<LoaderWrapperProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const isMobile = useMediaQuery("(max-width: 640px)");
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 640;
 
-  useEffect(() => {
-    // Skip loader completely on mobile - show home page directly
-    if (isMobile) {
-      setIsLoading(false);
-    }
-  }, [isMobile]);
-
-  // On mobile, render children directly without loader
   if (isMobile) {
     return <>{children}</>;
   }
-
   return <>{isLoading ? <Loader setHideLoader={setIsLoading} /> : children}</>;
 };
 
