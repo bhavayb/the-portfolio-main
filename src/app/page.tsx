@@ -12,7 +12,20 @@ import WorkExperience from "@/components/WorkExperience";
 import { Portfolio } from "@/utils/interface";
 
 export default async function Home() {
-  const portfolio = (await import("@/dummy.json")).default;
+  const rawPortfolio = (await import("@/dummy.json")).default;
+
+  const aboutWithOptionalShort = rawPortfolio.about as typeof rawPortfolio.about & {
+    short_description?: string;
+  };
+
+  const portfolio: Portfolio = {
+    ...rawPortfolio,
+    about: {
+      ...rawPortfolio.about,
+      short_description:
+        aboutWithOptionalShort.short_description ?? rawPortfolio.about.description,
+    },
+  };
 
   const {
     about,
@@ -23,7 +36,7 @@ export default async function Home() {
     social_handles,
     timeline,
     email,
-  } = portfolio as Portfolio;
+  } = portfolio;
 
   return (
     <main className="relative cursor-none">

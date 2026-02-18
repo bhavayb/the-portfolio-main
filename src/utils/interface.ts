@@ -18,6 +18,8 @@ export interface Portfolio {
 
 export interface About {
   name: string;
+  short_description: string;
+  location?: string; // add this
   title: string;
   subTitle: string;
   description: string;
