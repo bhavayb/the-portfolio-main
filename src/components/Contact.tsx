@@ -97,14 +97,14 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
                 ? "bg-red-500/20 border-red-500/50 text-red-200"
                 : status === "DONE"
                 ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-200"
-                : "bg-cyan-500/20 border-cyan-500/50 text-cyan-200"
+                : "bg-orange-400/20 border-orange-400/50 text-amber-200"
             )}
           >
             {status === "SENDING" && (
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full"
+                className="w-5 h-5 border-2 border-orange-400 border-t-transparent rounded-full"
               />
             )}
             {status === "DONE" && (
@@ -130,7 +130,7 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
             opacity: [0.3, 0.5, 0.3],
           }}
           transition={{ duration: 8, repeat: Infinity }}
-          className="absolute -top-40 -right-40 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px]"
+          className="absolute -top-40 -right-40 w-96 h-96 bg-orange-400/20 rounded-full blur-[120px]"
         />
         <motion.div
           animate={{
@@ -138,7 +138,7 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
             opacity: [0.2, 0.4, 0.2],
           }}
           transition={{ duration: 10, repeat: Infinity }}
-          className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]"
+          className="absolute -bottom-40 -left-40 w-96 h-96 bg-yellow-400/20 rounded-full blur-[120px]"
         />
       </div>
 
@@ -150,24 +150,24 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               transition={{ type: "spring", duration: 0.8 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-400/10 border border-orange-400/20 mb-6"
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-400"></span>
               </span>
-              <span className="text-cyan-400 text-sm font-medium">Available for work</span>
+              <span className="text-orange-400 text-sm font-medium">Available for work</span>
             </motion.div>
             
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-              <span className="text-white">Let&apos;s Create</span>
+              <span className="text-foreground">Let&apos;s Connect</span>
               <br />
-              <span className="bg-gradient-to-r from-cyan-400 via-cyan-300 to-purple-400 bg-clip-text text-transparent">
-                Something Amazing
+              <span className="bg-gradient-to-r from-orange-400 via-yellow-400 to-amber-400 bg-clip-text text-transparent">
+                Start Something Amazing
               </span>
             </h2>
             
-            <p className="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg sm:text-xl max-w-2xl mx-auto">
               Have a project in mind? Let&apos;s discuss how we can work together to bring your ideas to life.
             </p>
           </div>
@@ -182,19 +182,19 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
                 <motion.a
                   href={`mailto:${email}`}
                   whileHover={{ scale: 1.02, y: -2 }}
-                  className="group block p-6 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
+                  className="group block p-6 rounded-3xl bg-card/65 border border-border hover:border-orange-400/60 transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 group-hover:bg-cyan-500/20 transition-colors">
-                      <svg className="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="p-3 rounded-2xl bg-orange-400/10 border border-orange-400/20 group-hover:bg-orange-400/20 transition-colors">
+                      <svg className="w-6 h-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-gray-400 text-sm mb-1">Email me at</p>
-                      <p className="text-white font-semibold text-lg truncate group-hover:text-cyan-400 transition-colors">{email}</p>
+                      <p className="text-amber-300 text-sm mb-1">Email me at</p>
+                      <p className="text-foreground font-semibold text-lg truncate group-hover:text-orange-400 transition-colors">{email}</p>
                     </div>
-                    <svg className="w-5 h-5 text-gray-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-amber-400 group-hover:text-orange-400 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </div>
@@ -206,7 +206,7 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
                 <motion.a
                   href={`tel:${about.phoneNumber}`}
                   whileHover={{ scale: 1.02, y: -2 }}
-                  className="group block p-6 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-purple-500/50 transition-all duration-300"
+                  className="group block p-6 rounded-3xl bg-card/65 border border-border hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="flex items-start gap-4">
                     <div className="p-3 rounded-2xl bg-purple-500/10 border border-purple-500/20 group-hover:bg-purple-500/20 transition-colors">
@@ -215,10 +215,10 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
                       </svg>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-gray-400 text-sm mb-1">Call me at</p>
-                      <p className="text-white font-semibold text-lg group-hover:text-purple-400 transition-colors">{about.phoneNumber}</p>
+                      <p className="text-muted-foreground text-sm mb-1">Call me at</p>
+                      <p className="text-foreground font-semibold text-lg group-hover:text-purple-400 transition-colors">{about.phoneNumber}</p>
                     </div>
-                    <svg className="w-5 h-5 text-gray-500 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-muted-foreground group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </div>
@@ -229,7 +229,7 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
               <Transition>
                 <motion.div
                   whileHover={{ scale: 1.02, y: -2 }}
-                  className="group p-6 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-emerald-500/50 transition-all duration-300"
+                  className="group p-6 rounded-3xl bg-card/65 border border-border hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="flex items-start gap-4">
                     <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 group-hover:bg-emerald-500/20 transition-colors">
@@ -239,8 +239,8 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
                       </svg>
                     </div>
                     <div className="flex-1">
-                      <p className="text-gray-400 text-sm mb-1">Based in</p>
-                      <p className="text-white font-semibold text-lg group-hover:text-emerald-400 transition-colors">{about.address}</p>
+                      <p className="text-muted-foreground text-sm mb-1">Based in</p>
+                      <p className="text-foreground font-semibold text-lg group-hover:text-emerald-400 transition-colors">{about.address}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -248,8 +248,8 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
 
               {/* Social Links */}
               <Transition>
-                <div className="p-6 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10">
-                  <p className="text-gray-400 text-sm mb-4">Connect with me</p>
+                <div className="p-6 rounded-3xl bg-card/65 border border-border transition-all duration-300 hover:-translate-y-1">
+                  <p className="text-muted-foreground text-sm mb-4">Connect with me</p>
                   <div className="flex flex-wrap gap-3">
                     {social_handle.map((social, index) =>
                       social.enabled ? (
@@ -263,7 +263,7 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/10 text-gray-400 hover:text-cyan-400 transition-all duration-300"
+                          className="p-3 rounded-xl bg-background/50 border border-border hover:border-orange-400/50 hover:bg-orange-400/10 text-muted-foreground hover:text-orange-400 transition-all duration-300"
                           title={social.platform}
                         >
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -282,11 +282,11 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
               <Transition>
                 <motion.form
                   onSubmit={handleSubmit}
-                  className="p-4 sm:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm shadow-md max-w-full"
+                  className="p-4 sm:p-6 rounded-2xl bg-card/75 border border-border backdrop-blur-sm shadow-md max-w-full transition-all duration-300 hover:-translate-y-1"
                   style={{ boxSizing: 'border-box' }}
                 >
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">Send a Message</h3>
-                  <p className="text-gray-400 mb-6 text-sm sm:text-base">Fill out the form below and I&apos;ll get back to you as soon as possible.</p>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">Send a Message</h3>
+                  <p className="text-muted-foreground mb-6 text-sm sm:text-base">Fill out the form below and I&apos;ll get back to you as soon as possible.</p>
                   <div className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <input
@@ -297,7 +297,7 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
                         required
                         value={formData.name}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-3 rounded-lg border border-white/10 bg-transparent text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm"
+                        className="w-full px-3 py-3 rounded-lg border border-border bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
                       />
                       <input
                         id="email"
@@ -307,7 +307,7 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
                         required
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-3 rounded-lg border border-white/10 bg-transparent text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm"
+                        className="w-full px-3 py-3 rounded-lg border border-border bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
                       />
                     </div>
                     <input
@@ -318,7 +318,7 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
                       required
                       value={formData.subject}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-3 rounded-lg border border-white/10 bg-transparent text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm"
+                      className="w-full px-3 py-3 rounded-lg border border-border bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
                     />
                     <textarea
                       id="message"
@@ -328,13 +328,13 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-3 rounded-lg border border-white/10 bg-transparent text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm resize-none"
+                      className="w-full px-3 py-3 rounded-lg border border-border bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm resize-none"
                       style={{ minHeight: 100, maxHeight: 220 }}
                     />
                     <button
                       type="submit"
                       disabled={status === "SENDING"}
-                      className="w-full py-3 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-base transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="w-full py-3 rounded-lg bg-orange-400 hover:bg-amber-400 text-white font-semibold text-base transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       {status === "SENDING" ? "Sending..." : "Send Message"}
                     </button>
@@ -348,10 +348,10 @@ const Contact = ({ email, social_handle, about }: ContactProps) => {
           </div>
         </div>
       </div>
-      <footer className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm border-t border-white/10 bg-black/40 mt-8">
-        <div className="text-white/60">&copy; {new Date().getFullYear()} <span className="font-semibold">Bhavay Batra</span></div>
-        <p className="text-white/60">
-          developed by <Link href="https://github.com/bhavayb" className="hover:underline hover:text-white transition-colors">Bhavay Batra</Link>
+      <footer className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm border-t border-border bg-card/60 mt-8 transition-colors duration-300">
+        <div className="text-muted-foreground">&copy; {new Date().getFullYear()} <span className="font-semibold">Bhavay Batra</span></div>
+        <p className="text-muted-foreground">
+          developed by <Link href="https://github.com/bhavayb" className="hover:underline hover:text-foreground transition-colors">Bhavay Batra</Link>
         </p>
       </footer>
     </motion.section>

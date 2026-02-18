@@ -57,9 +57,9 @@ function Skills({ skills }: SkillsProps) {
   const SkillCard = (skill: Skill) => (
     <div
       key={skill._id}
-      className="flex flex-col items-center justify-start flex-shrink-0 group w-[120px] sm:w-[140px] md:w-[160px]"
+      className="flex flex-col items-center justify-start flex-shrink-0 group w-[120px] sm:w-[140px] md:w-[160px] transition-transform duration-300 hover:-translate-y-1"
     >
-      <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-cyan-600/10 to-cyan-500/10 border border-cyan-600/30 backdrop-blur-sm group-hover:bg-transparent group-hover:border-cyan-500/60 group-hover:scale-105 transition-all duration-300 shadow-md flex items-center justify-center p-3">
+      <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-card/70 border border-border backdrop-blur-sm group-hover:bg-card/90 group-hover:border-yellow-400/60 group-hover:scale-105 transition-all duration-300 shadow-md flex items-center justify-center p-3">
         <div className="relative w-full h-full">
           <Image
             src={skill.image.url}
@@ -70,7 +70,7 @@ function Skills({ skills }: SkillsProps) {
           />
         </div>
       </div>
-      <span className="mt-3 text-sm font-semibold text-white/80 group-hover:text-white transition-colors text-center w-full px-2 overflow-hidden text-ellipsis whitespace-nowrap">
+      <span className="mt-3 text-sm font-semibold text-foreground/80 group-hover:text-foreground transition-colors text-center w-full px-2 overflow-hidden text-ellipsis whitespace-nowrap">
         {skill.name}
       </span>
     </div>
@@ -81,17 +81,17 @@ function Skills({ skills }: SkillsProps) {
   const duration2 = Math.max(12, rail2.length * 1.1);
 
   return (
-    <section id="skills" className="py-16 sm:py-20 md:py-24 overflow-hidden bg-gradient-to-b from-transparent via-purple-950/10 to-transparent relative">
+    <section id="skills" className="py-16 sm:py-20 md:py-24 overflow-hidden bg-gradient-to-b from-transparent via-amber-100/20 dark:via-amber-900/10 to-transparent relative transition-colors duration-300">
       <span className="blob absolute top-[30%] right-0 w-1/4 h-2/3 blur-[80px] rotate-180 -z-20 opacity-12" />
       <div className="text-center mb-10 sm:mb-12 md:mb-16 px-4">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-400 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_18px_rgba(6,182,212,0.2)]">
-          Skills & <span className="text-cyan-400">Technologies</span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_18px_rgba(251,191,36,0.2)]">
+          Skills & <span className="text-orange-400">Technologies</span>
         </h2>
-        <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-cyan-500 to-cyan-400 mx-auto rounded-full mb-3 sm:mb-4" />
-        <p className="text-gray-400 text-base sm:text-lg">Technologies I work with</p>
+        <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-orange-500 to-yellow-400 mx-auto rounded-full mb-3 sm:mb-4" />
+        <p className="text-muted-foreground text-base sm:text-lg">Technologies I work with</p>
       </div>
 
-      {/* Two animated rails: one left-to-right, one right-to-left */}
+      {/* Two animated rails: one left-to-right, one right-to-left (color updated) */}
       <div className="space-y-8 md:space-y-12">
         {/* Top rail: left to right */}
         <div className="overflow-hidden w-full">

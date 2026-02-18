@@ -10,11 +10,11 @@ const Testimonials = ({ testimonials }: { testimonials: ITestimonial[] }) => {
     <section className="py-12 sm:py-16 md:py-20 relative" id="testimonials">
       <span className="blob size-1/2 absolute -top-20 left-0 blur-[100px] -z-10" />
       <div className="text-center mb-10 sm:mb-12 md:mb-16 px-4">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-400 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_18px_rgba(6,182,212,0.22)]">
-          Client <span className="text-cyan-400">Testimonials</span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_18px_rgba(251,191,36,0.22)]">
+          Client <span className="text-orange-400">Testimonials</span>
         </h2>
-        <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-cyan-500 to-cyan-400 mx-auto rounded-full mb-3 sm:mb-4" />
-        <p className="text-gray-400 text-base sm:text-lg">What our clients say</p>
+        <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-orange-500 to-yellow-400 mx-auto rounded-full mb-3 sm:mb-4" />
+        <p className="text-muted-foreground text-base sm:text-lg">What our clients say</p>
       </div>
       <Testimonial testimonials={testimonials} speed="normal" pauseOnHover />
       <Testimonial
@@ -54,13 +54,13 @@ const Testimonial = ({
         {testimonials.map((val) => (
           <li
             key={val._id}
-            className="p-4 sm:p-5 md:p-6 bg-white/5 border border-cyan-600/18 w-[280px] sm:w-[320px] md:w-[400px] lg:w-[450px] rounded-xl sm:rounded-2xl space-y-2 relative overflow-hidden z-0 backdrop-blur-sm hover:bg-white/10 hover:border-cyan-500/30 transition-all flex-shrink-0"
+            className="p-4 sm:p-5 md:p-6 bg-card/70 border border-border w-[280px] sm:w-[320px] md:w-[400px] lg:w-[450px] rounded-xl sm:rounded-2xl space-y-2 relative overflow-hidden z-0 backdrop-blur-sm hover:bg-card/90 hover:border-yellow-400/30 transition-all hover:-translate-y-1 flex-shrink-0"
           >
             <div className="relative">
-              <span className="text-6xl sm:text-7xl md:text-9xl absolute -top-6 sm:-top-7 md:-top-9 -left-1 sm:-left-2 size-8 sm:size-10 text-cyan-500/24">
+              <span className="text-6xl sm:text-7xl md:text-9xl absolute -top-6 sm:-top-7 md:-top-9 -left-1 sm:-left-2 size-8 sm:size-10 text-amber-400/24">
                 &quot;
               </span>
-              <p className="line-clamp-3 sm:line-clamp-4 text-white/80 text-sm sm:text-base">
+              <p className="line-clamp-3 sm:line-clamp-4 text-foreground/80 text-sm sm:text-base">
                 {val.review}
               </p>
             </div>
@@ -70,11 +70,11 @@ const Testimonial = ({
                 width={50}
                 height={50}
                 alt={val.name}
-                className="object-scale-down size-8 sm:size-9 md:size-10 bg-black rounded-full border border-cyan-600/18"
+                className="object-scale-down size-8 sm:size-9 md:size-10 bg-background rounded-full border border-border"
               />
               <div>
-                <h4 className="font-medium sm:font-semibold text-white text-sm sm:text-base">{val.name}</h4>
-                <h5 className="text-xs sm:text-sm text-white/70">
+                <h4 className="font-medium sm:font-semibold text-foreground text-sm sm:text-base">{val.name}</h4>
+                <h5 className="text-xs sm:text-sm text-muted-foreground">
                   {val.position}
                 </h5>
               </div>

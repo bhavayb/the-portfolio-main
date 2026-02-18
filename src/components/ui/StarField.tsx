@@ -66,7 +66,7 @@ export const StarField = () => {
         );
         
         gradient.addColorStop(0, `rgba(168, 85, 247, ${opacity * 0.25})`); // Purple subtle
-        gradient.addColorStop(0.5, `rgba(6, 182, 212, ${opacity * 0.25})`); // Cyan subtle
+        gradient.addColorStop(0.5, `rgba(251, 191, 36, ${opacity * 0.25})`); // Amber subtle
         gradient.addColorStop(1, `rgba(6, 182, 212, 0)`);
 
         ctx.fillStyle = gradient;

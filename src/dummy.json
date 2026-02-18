@@ -33,23 +33,6 @@
   "role": "admin",
   "timeline": [
     {
-      "company_name": "",
-      "summary": "Secondary Education, Central Board of Secondary Education (CBSE)",
-      "sequence": 6,
-      "startDate": "2020-04-13T00:00:00.000Z",
-      "endDate": "2021-05-13T00:00:00.000Z",
-      "jobTitle": "Modern Delhi Public School",
-      "jobLocation": " New Delhi, India",
-      "bulletPoints": [
-        "Built core fundamentals across subjects and learned structured learning habits.",
-        "Developed curiosity, clarity in basics, and confidence in academics."
-      ],
-      "forEducation": true,
-      "enabled": true,
-      "_id": "65f1fe900556c3f887e9db94"
-    },
-    
-    {
       "company_name": "RNY Clothing - E-commerce platform for trendy apparel",
       "summary": "Contributed to the development of a full-stack web application supporting product listings, user interactions, and business workflows.",
       "sequence": 3,

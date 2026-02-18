@@ -15,11 +15,11 @@ function Services({ services }: ServiceProps) {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10 sm:mb-16 md:mb-20">
           <Transition>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-400 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_18px_rgba(6,182,212,0.22)]">
-              How I Can <span className="text-cyan-400">Help You</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_18px_rgba(251,191,36,0.22)]">
+              How I Can <span className="text-orange-400">Help You</span>
             </h2>
-            <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-cyan-500 to-cyan-400 mx-auto rounded-full mb-3 sm:mb-4" />
-            <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
+            <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-orange-500 to-yellow-400 mx-auto rounded-full mb-3 sm:mb-4" />
+            <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto px-4">
               Expert services tailored to bring your vision to life
             </p>
           </Transition>
@@ -32,13 +32,13 @@ function Services({ services }: ServiceProps) {
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <div className="group relative bg-black/40 backdrop-blur-xl border border-white/10 hover:border-cyan-600/30 rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-600/16 h-full">
+              <div className="group relative bg-card/70 backdrop-blur-xl border border-border hover:border-amber-400/30 rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 transition-all duration-300 hover:shadow-lg hover:shadow-amber-400/16 hover:-translate-y-1 h-full">
                 {/* Glow effect */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-700 to-cyan-600 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-10 blur-md transition-opacity duration-300" />
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-700 to-yellow-600 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-10 blur-md transition-opacity duration-300" />
                 
                 {/* Icon/Image */}
                 <div className="relative mb-4 sm:mb-6">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl bg-gradient-to-br from-cyan-600/14 to-cyan-500/12 border border-cyan-600/30 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl bg-gradient-to-br from-orange-400/14 to-yellow-400/12 border border-orange-400/30 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-300">
                     {getServiceIcon(service.name)}
                   </div>
                   {/* Accent dot */}
@@ -49,18 +49,18 @@ function Services({ services }: ServiceProps) {
 
                 {/* Content */}
                 <div className="relative space-y-3 sm:space-y-4">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground group-hover:text-cyan-300 transition-colors">
                     {service.name}
                   </h3>
                   
-                  <p className="text-white/75 leading-relaxed text-sm sm:text-base">
+                  <p className="text-foreground/75 leading-relaxed text-sm sm:text-base">
                     {service.desc}
                   </p>
 
                   {/* Price */}
                   <div className="pt-3 sm:pt-4 border-t border-cyan-600/18">
                     <div className="flex items-center justify-between">
-                      <span className="text-white/65 text-xs sm:text-sm font-medium">Starting at</span>
+                      <span className="text-muted-foreground text-xs sm:text-sm font-medium">Starting at</span>
                         <span className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent">
                         {service.charge}
                       </span>
@@ -86,7 +86,7 @@ function Services({ services }: ServiceProps) {
         <Transition className="flex justify-center mt-10 sm:mt-12 md:mt-16">
           <Link
             href={"#contact"}
-            className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-slate-800 border border-cyan-600/24 rounded-full text-white font-semibold overflow-hidden transition-all duration-200 hover:scale-103 text-sm sm:text-base touch-manipulation active:scale-95"
+            className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-secondary border border-cyan-600/24 rounded-full text-foreground font-semibold overflow-hidden transition-all duration-200 hover:scale-103 text-sm sm:text-base touch-manipulation active:scale-95"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity" />
             <span className="relative flex items-center gap-2">

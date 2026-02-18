@@ -83,11 +83,11 @@ function Projects() {
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
           <Transition>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-400 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_18px_rgba(6,182,212,0.22)]">
-              My <span className="text-cyan-400">Projects</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_18px_rgba(251,191,36,0.22)]">
+              My <span className="text-orange-400">Projects</span>
             </h2>
-            <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-cyan-500 to-cyan-400 mx-auto rounded-full mb-3 sm:mb-4" />
-            <p className="text-gray-400 text-base sm:text-lg max-w-xl mx-auto">
+            <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-orange-500 to-yellow-400 mx-auto rounded-full mb-3 sm:mb-4" />
+            <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto">
               Here are some of my recent works
             </p>
           </Transition>
@@ -136,7 +136,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-sm"
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -144,12 +144,12 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
         exit={{ scale: 0.9, opacity: 0, y: 20 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl"
+        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-card border border-border rounded-2xl shadow-2xl"
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-black/50 hover:bg-black/70 rounded-full text-white transition-colors"
+          className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-background/70 hover:bg-background rounded-full text-foreground transition-colors"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -163,27 +163,27 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
             alt={project.title}
             className="w-full h-full object-cover rounded-t-2xl"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
         </div>
 
         {/* Content */}
         <div className="p-6 sm:p-8">
           {/* Title */}
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">{project.title}</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">{project.title}</h2>
           
           {/* Description */}
-          <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
             {project.description}
           </p>
 
           {/* Tech Stack */}
           <div className="mb-8">
-            <h3 className="text-sm text-gray-500 uppercase tracking-wider mb-3">Technologies Used</h3>
+            <h3 className="text-sm text-muted-foreground uppercase tracking-wider mb-3">Technologies Used</h3>
             <div className="flex flex-wrap gap-2">
               {project.techStack.map((tech, i) => (
                 <span
                   key={i}
-                  className="px-4 py-2 bg-cyan-500/10 text-cyan-400 rounded-full text-sm border border-cyan-500/30"
+                  className="px-4 py-2 bg-orange-400/10 text-orange-400 rounded-full text-sm border border-orange-400/30"
                 >
                   {tech}
                 </span>
@@ -197,7 +197,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
               href={project.githuburl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-3 bg-gray-800 hover:bg-gray-700 text-white py-3 px-6 rounded-xl transition-colors duration-300 font-medium"
+              className="flex-1 flex items-center justify-center gap-3 bg-secondary hover:bg-secondary/80 text-foreground py-3 px-6 rounded-xl transition-colors duration-300 font-medium"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -208,7 +208,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
               href={project.liveurl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-3 bg-cyan-600 hover:bg-cyan-500 text-white py-3 px-6 rounded-xl transition-colors duration-300 font-medium"
+              className="flex-1 flex items-center justify-center gap-3 bg-orange-500 hover:bg-yellow-400 text-black py-3 px-6 rounded-xl transition-colors duration-300 font-medium"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -228,7 +228,7 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
   return (
     <div 
       onClick={onClick}
-      className="bg-gray-900/50 border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-all duration-300 group cursor-pointer"
+      className="bg-card/70 border border-border rounded-xl overflow-hidden hover:border-orange-400/50 transition-all duration-300 group cursor-pointer hover:-translate-y-1"
     >
       {/* Image Container */}
       <div 
@@ -248,21 +248,21 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
           initial={{ opacity: 0 }}
           animate={{ opacity: isHovered ? 1 : 0 }}
           transition={{ duration: 0.3 }}
-          className="absolute inset-0 bg-gradient-to-t from-black via-black/95 to-black/90 flex flex-col justify-center p-5 sm:p-6"
+          className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-background/90 flex flex-col justify-center p-5 sm:p-6"
         >
           {/* Project Label */}
-          <span className="text-cyan-400 text-xs font-medium uppercase tracking-wider mb-2">
+          <span className="text-orange-400 text-xs font-medium uppercase tracking-wider mb-2">
             Click to view details
           </span>
           
           {/* Title */}
-          <h4 className="text-white font-bold text-xl sm:text-2xl mb-3">{project.title}</h4>
+          <h4 className="text-foreground font-bold text-xl sm:text-2xl mb-3">{project.title}</h4>
           
           {/* Divider */}
-          <div className="w-12 h-0.5 bg-cyan-500 mb-4"></div>
+          <div className="w-12 h-0.5 bg-orange-400 mb-4"></div>
           
           {/* Description */}
-          <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-4 line-clamp-3">
+          <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4 line-clamp-3">
             {project.description}
           </p>
           
@@ -272,13 +272,13 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
               {project.techStack.slice(0, 3).map((tech, i) => (
                 <span 
                   key={i} 
-                  className="text-xs bg-white/10 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/30"
+                  className="text-xs bg-white/10 text-yellow-400 px-3 py-1.5 rounded-full border border-yellow-400/30"
                 >
                   {tech}
                 </span>
               ))}
               {project.techStack.length > 3 && (
-                <span className="text-xs text-gray-400 px-2 py-1.5">
+                <span className="text-xs text-muted-foreground px-2 py-1.5">
                   +{project.techStack.length - 3} more
                 </span>
               )}
@@ -289,7 +289,7 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
 
       {/* Card Footer */}
       <div className="p-4 sm:p-5">
-        <h3 className="text-white font-semibold text-lg mb-4">{project.title}</h3>
+        <h3 className="text-foreground font-semibold text-lg mb-4">{project.title}</h3>
         
         {/* Buttons */}
         <div className="flex gap-3">
@@ -299,7 +299,7 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="flex-1 flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 text-white py-2.5 px-4 rounded-lg transition-colors duration-300 text-sm font-medium"
+            className="flex-1 flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/80 text-foreground py-2.5 px-4 rounded-lg transition-colors duration-300 text-sm font-medium"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -313,7 +313,7 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="flex-1 flex items-center justify-center gap-2 bg-cyan-600 hover:bg-cyan-500 text-white py-2.5 px-4 rounded-lg transition-colors duration-300 text-sm font-medium"
+            className="flex-1 flex items-center justify-center gap-2 bg-orange-500 hover:bg-yellow-400 text-black py-2.5 px-4 rounded-lg transition-colors duration-300 text-sm font-medium"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

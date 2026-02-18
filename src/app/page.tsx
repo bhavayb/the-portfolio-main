@@ -31,7 +31,7 @@ export default async function Home() {
       <Header social={social_handles} />
       <Hero about={about} social={social_handles} />
       <About about={about} />
-      <WorkExperience />
+      <WorkExperience timeline={timeline} />
       <Skills skills={skills} />
       <Projects />
       {/* <Services services={services} /> */}

@@ -36,12 +36,13 @@ export interface Avatar {
 }
 
 export interface Skill {
-  enabled: boolean;
+  _id: string;
   name: string;
+  enabled: boolean;
+  icon?: string; // ✅ fix: optional icon URL/path used by <Image src={skill.icon} />
   sequence: number;
   percentage: number;
   image: Avatar;
-  _id: string;
 }
 
 export interface Project {

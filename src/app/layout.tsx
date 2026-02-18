@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Cinzel_Decorative } from "next/font/google";
+import LoaderGate from "@/components/LoaderGate";
 import "./globals.css";
 
 export const stylishFont = Cinzel_Decorative({
@@ -29,7 +30,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`antialiased ${stylishFont.variable}`}>
-      <body className="min-h-dvh overflow-x-hidden">{children}</body>
+      <body className="min-h-dvh overflow-x-hidden">
+        <LoaderGate>{children}</LoaderGate>
+      </body>
     </html>
   );
 }

@@ -12,15 +12,18 @@ function CustomCursor() {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 200 };
+  const springConfig = { damping: 36, stiffness: 110, mass: 1.15 };
+  const auraSpringConfig = { damping: 34, stiffness: 70, mass: 1.35 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
+  const auraXSpring = useSpring(cursorX, auraSpringConfig);
+  const auraYSpring = useSpring(cursorY, auraSpringConfig);
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
       requestAnimationFrame(() => {
-        cursorX.set(e.clientX - (variant === "PROJECT" ? 50 : 10));
-        cursorY.set(e.clientY - (variant === "PROJECT" ? 50 : 10));
+        cursorX.set(e.clientX - 14);
+        cursorY.set(e.clientY - 14);
       });
     };
 
@@ -38,66 +41,44 @@ function CustomCursor() {
     };
   }, [variant]);
 
+  // No variants needed for dog cursor, but keep for compatibility
   const variants: Variants = {
-    DEFAULT: {
-      width: 20,
-      height: 20,
-      backgroundColor: "transparent",
-      border: "2px solid #22d3ee",
-      boxShadow: "0 0 20px rgba(34, 211, 238, 0.5), 0 0 40px rgba(34, 211, 238, 0.2)",
-    },
-    PROJECT: {
-      height: 100,
-      width: 100,
-      backgroundColor: "rgba(34, 211, 238, 0.1)",
-      border: "2px solid #22d3ee",
-      boxShadow: "0 0 30px rgba(34, 211, 238, 0.6)",
-    },
-    BUTTON: {
-      width: 40,
-      height: 40,
-      backgroundColor: "rgba(34, 211, 238, 0.2)",
-      border: "2px solid #22d3ee",
-      boxShadow: "0 0 25px rgba(34, 211, 238, 0.7)",
-    },
-    TEXT: {
-      height: 60,
-      width: 60,
-      backgroundColor: "transparent",
-      border: "2px solid #22d3ee",
-      boxShadow: "0 0 25px rgba(34, 211, 238, 0.5)",
-    },
+    DEFAULT: {},
+    PROJECT: {},
+    BUTTON: {},
+    TEXT: {},
   };
 
   return (
     <>
-      {/* Main cursor */}
       <motion.div
-        className="fixed top-0 left-0 z-[9999] rounded-full pointer-events-none grid place-items-center max-md:hidden"
-        variants={variants}
-        animate={variant}
+        className="fixed top-0 left-0 z-[9998] pointer-events-none max-md:hidden"
+        style={{
+          translateX: auraXSpring,
+          translateY: auraYSpring,
+          width: 28,
+          height: 28,
+          opacity: isClicking ? 0.45 : 0.75,
+        }}
+      >
+        <div className="h-full w-full rounded-full bg-amber-400/25 blur-sm" />
+      </motion.div>
+
+      <motion.div
+        className="fixed top-0 left-0 z-[9999] pointer-events-none max-md:hidden"
         style={{
           translateX: cursorXSpring,
           translateY: cursorYSpring,
-          scale: isClicking ? 0.8 : 1,
+          scale: isClicking ? 0.85 : 1,
+          width: 28,
+          height: 28,
         }}
-        transition={{ scale: { duration: 0.15 } }}
       >
-        {variant === "PROJECT" && (
-          <span className="text-cyan-400 text-sm font-semibold">VIEW</span>
-        )}
+        <div className="relative h-full w-full">
+          <div className="absolute inset-0 rounded-full border border-orange-300/70 bg-gradient-to-br from-orange-300/30 via-yellow-300/15 to-amber-300/30 shadow-[0_0_18px_rgba(251,191,36,0.4)]" />
+          <div className="absolute inset-[9px] rounded-full bg-gradient-to-r from-orange-400 via-yellow-300 to-amber-400" />
+        </div>
       </motion.div>
-      
-      {/* Cursor dot (inner) */}
-      <motion.div
-        className="fixed top-0 left-0 w-1.5 h-1.5 bg-cyan-400 rounded-full z-[9999] pointer-events-none max-md:hidden"
-        style={{
-          translateX: cursorX,
-          translateY: cursorY,
-          x: variant === "PROJECT" ? 46 : 6,
-          y: variant === "PROJECT" ? 46 : 6,
-        }}
-      />
     </>
   );
 }
