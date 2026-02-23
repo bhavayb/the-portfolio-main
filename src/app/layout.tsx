@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Cinzel_Decorative } from "next/font/google";
+import { Inter } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import LoaderGate from "@/components/LoaderGate";
 import "./globals.css";
 
-export const stylishFont = Cinzel_Decorative({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
-  variable: "--font-stylish",
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -20,7 +21,10 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
   viewportFit: "cover",
-  themeColor: "#000000",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)",  color: "#0a0a0a" },
+  ],
 };
 
 export default function RootLayout({
@@ -29,9 +33,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`antialiased ${stylishFont.variable}`}>
-      <body className="min-h-dvh overflow-x-hidden">
-        <LoaderGate>{children}</LoaderGate>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <body className="min-h-dvh overflow-x-hidden font-[var(--font-inter)]">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <LoaderGate>{children}</LoaderGate>
+        </ThemeProvider>
       </body>
     </html>
   );

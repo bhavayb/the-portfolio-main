@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
-import { Transition } from "./ui/Transitions";
 
 interface Project {
   liveurl: string;
@@ -78,36 +77,29 @@ function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <section className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-8 relative" id="projects">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
-          <Transition>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_18px_rgba(251,191,36,0.22)]">
-              My <span className="text-orange-400">Projects</span>
-            </h2>
-            <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-orange-500 to-yellow-400 mx-auto rounded-full mb-3 sm:mb-4" />
-            <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto">
-              Here are some of my recent works
-            </p>
-          </Transition>
+    <section className="py-24 sm:py-32 border-t border-border bg-background" id="projects">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+        {/* Label */}
+        <div className="flex items-center gap-3 mb-12">
+          <div className="h-px w-8 bg-foreground" />
+          <span className="text-xs uppercase tracking-widest text-muted-foreground">Selected Projects</span>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 max-w-6xl mx-auto">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projectsData.map((project, index) => {
-            // Check if this is the last item and if total count is odd (single item in last row)
-            const isLastSingleItem = index === projectsData.length - 1 && projectsData.length % 2 === 1;
-            
+            const isLastSingle = index === projectsData.length - 1 && projectsData.length % 2 === 1;
             return (
-              <Transition
+              <motion.div
                 key={project._id}
-                transition={{ delay: 0.1 + index * 0.1 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className={isLastSingleItem ? "md:col-span-2 md:max-w-[calc(50%-1.25rem)] md:mx-auto" : ""}
+                transition={{ delay: index * 0.08, duration: 0.45 }}
+                className={isLastSingle ? "md:col-span-2 md:max-w-[calc(50%-0.75rem)]" : ""}
               >
                 <ProjectCard project={project} onClick={() => setSelectedProject(project)} />
-              </Transition>
+              </motion.div>
             );
           })}
         </div>
@@ -116,10 +108,7 @@ function Projects() {
       {/* Modal */}
       <AnimatePresence>
         {selectedProject && (
-          <ProjectModal 
-            project={selectedProject} 
-            onClose={() => setSelectedProject(null)} 
-          />
+          <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
         )}
       </AnimatePresence>
     </section>
@@ -136,55 +125,43 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
     >
       <motion.div
-        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        initial={{ scale: 0.95, opacity: 0, y: 16 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.9, opacity: 0, y: 20 }}
-        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+        exit={{ scale: 0.95, opacity: 0, y: 16 }}
+        transition={{ type: "spring", damping: 28, stiffness: 320 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-card border border-border rounded-2xl shadow-2xl"
+        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-background border border-border rounded-sm shadow-2xl"
       >
-        {/* Close Button */}
+        {/* Close */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-background/70 hover:bg-background rounded-full text-foreground transition-colors"
+          className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center border border-border rounded-sm text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors bg-background"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
-        {/* Project Image */}
-        <div className="relative aspect-video w-full">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover rounded-t-2xl"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+        {/* Image */}
+        <div className="relative aspect-video w-full overflow-hidden">
+          <img src={project.image} alt={project.title} className="w-full h-full object-cover grayscale" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         </div>
 
         {/* Content */}
         <div className="p-6 sm:p-8">
-          {/* Title */}
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">{project.title}</h2>
-          
-          {/* Description */}
-          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
-            {project.description}
-          </p>
+          <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-3">{project.title}</h2>
+          <p className="text-muted-foreground text-sm leading-relaxed mb-6">{project.description}</p>
 
           {/* Tech Stack */}
-          <div className="mb-8">
-            <h3 className="text-sm text-muted-foreground uppercase tracking-wider mb-3">Technologies Used</h3>
+          <div className="mb-6">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Stack</p>
             <div className="flex flex-wrap gap-2">
               {project.techStack.map((tech, i) => (
-                <span
-                  key={i}
-                  className="px-4 py-2 bg-orange-400/10 text-orange-400 rounded-full text-sm border border-orange-400/30"
-                >
+                <span key={i} className="px-3 py-1 text-xs border border-border rounded-sm text-muted-foreground">
                   {tech}
                 </span>
               ))}
@@ -192,28 +169,28 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
           </div>
 
           {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex gap-3">
             <a
               href={project.githuburl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-3 bg-secondary hover:bg-secondary/80 text-foreground py-3 px-6 rounded-xl transition-colors duration-300 font-medium"
+              className="flex-1 flex items-center justify-center gap-2 border border-border rounded-sm py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
             >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
               </svg>
-              View on GitHub
+              GitHub
             </a>
             <a
               href={project.liveurl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-3 bg-orange-500 hover:bg-yellow-400 text-black py-3 px-6 rounded-xl transition-colors duration-300 font-medium"
+              className="flex-1 flex items-center justify-center gap-2 bg-foreground text-background rounded-sm py-2.5 text-sm font-medium hover:opacity-80 transition-opacity"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
-              View Live Demo
+              Live Demo
             </a>
           </div>
         </div>
@@ -223,106 +200,70 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
 };
 
 const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => void }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <div 
+    <div
       onClick={onClick}
-      className="bg-card/70 border border-border rounded-xl overflow-hidden hover:border-orange-400/50 transition-all duration-300 group cursor-pointer hover:-translate-y-1"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="group cursor-pointer border border-border rounded-sm overflow-hidden hover:border-foreground/30 transition-all duration-300 bg-card"
     >
-      {/* Image Container */}
-      <div 
-        className="relative aspect-video overflow-hidden"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {/* Project Image */}
+      {/* Image */}
+      <div className="relative aspect-video overflow-hidden">
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-500"
         />
-        
-        {/* Hover Overlay with Description */}
+        {/* Hover overlay */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-background/90 flex flex-col justify-center p-5 sm:p-6"
+          animate={{ opacity: hovered ? 1 : 0 }}
+          transition={{ duration: 0.25 }}
+          className="absolute inset-0 bg-background/92 flex flex-col justify-end p-5"
         >
-          {/* Project Label */}
-          <span className="text-orange-400 text-xs font-medium uppercase tracking-wider mb-2">
-            Click to view details
-          </span>
-          
-          {/* Title */}
-          <h4 className="text-foreground font-bold text-xl sm:text-2xl mb-3">{project.title}</h4>
-          
-          {/* Divider */}
-          <div className="w-12 h-0.5 bg-orange-400 mb-4"></div>
-          
-          {/* Description */}
-          <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4 line-clamp-3">
-            {project.description}
-          </p>
-          
-          {/* Tech Stack */}
-          <div className="mt-auto">
-            <div className="flex flex-wrap gap-2">
-              {project.techStack.slice(0, 3).map((tech, i) => (
-                <span 
-                  key={i} 
-                  className="text-xs bg-white/10 text-yellow-400 px-3 py-1.5 rounded-full border border-yellow-400/30"
-                >
-                  {tech}
-                </span>
-              ))}
-              {project.techStack.length > 3 && (
-                <span className="text-xs text-muted-foreground px-2 py-1.5">
-                  +{project.techStack.length - 3} more
-                </span>
-              )}
-            </div>
-          </div>
+          <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Click to view details</p>
+          <h4 className="text-base font-bold text-foreground mb-2">{project.title}</h4>
+          <p className="text-xs text-muted-foreground line-clamp-3 leading-relaxed">{project.description}</p>
         </motion.div>
       </div>
 
-      {/* Card Footer */}
-      <div className="p-4 sm:p-5">
-        <h3 className="text-foreground font-semibold text-lg mb-4">{project.title}</h3>
-        
-        {/* Buttons */}
-        <div className="flex gap-3">
-          {/* GitHub Button */}
+      {/* Footer */}
+      <div className="p-4 flex items-center justify-between">
+        <div className="flex-1 min-w-0">
+          <h3 className="text-sm font-semibold text-foreground truncate">{project.title}</h3>
+          <div className="flex gap-1.5 mt-1.5 flex-wrap">
+            {project.techStack.slice(0, 3).map((t, i) => (
+              <span key={i} className="text-[10px] text-muted-foreground border border-border px-1.5 py-0.5 rounded-sm">
+                {t}
+              </span>
+            ))}
+            {project.techStack.length > 3 && (
+              <span className="text-[10px] text-muted-foreground">+{project.techStack.length - 3}</span>
+            )}
+          </div>
+        </div>
+        <div className="flex gap-2 ml-4 shrink-0">
           <a
-            href={project.githuburl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={project.githuburl} target="_blank" rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="flex-1 flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/80 text-foreground py-2.5 px-4 rounded-lg transition-colors duration-300 text-sm font-medium"
+            className="w-8 h-8 border border-border rounded-sm flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
           >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
             </svg>
-            GitHub
           </a>
-          
-          {/* Live Project Button */}
           <a
-            href={project.liveurl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={project.liveurl} target="_blank" rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="flex-1 flex items-center justify-center gap-2 bg-orange-500 hover:bg-yellow-400 text-black py-2.5 px-4 rounded-lg transition-colors duration-300 text-sm font-medium"
+            className="w-8 h-8 border border-border rounded-sm flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
-            Live Demo
           </a>
         </div>
       </div>
     </div>
   );
 };
-

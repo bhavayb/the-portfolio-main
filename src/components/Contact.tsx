@@ -2,13 +2,8 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-
 import { About, SocialHandle } from "../utils/interface";
-import { cn } from "../utils/cn";
 import Link from "next/link";
-import { SectionHeading, TextReveal } from "./ui/Typography";
-import { SlideIn, Transition } from "./ui/Transitions";
-import { Input, Textarea } from "./ui/Input";
 
 interface ContactProps {
   email: string;
@@ -26,337 +21,194 @@ const socialIcons: Record<string, string> = {
   Leetcode: "M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z",
 };
 
+const inputClass =
+  "w-full px-4 py-3 rounded-sm border border-border bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-foreground/50 transition-colors text-sm";
+
 const Contact = ({ email, social_handle, about }: ContactProps) => {
   const [status, setStatus] = useState<"SENDING" | "DONE" | "ERROR" | "IDLE">("IDLE");
   const [statusText, setStatusText] = useState("");
-  const [activeField, setActiveField] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
 
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("SENDING");
-
-    try {
-      console.log("Form data:", formData);
-      setTimeout(() => {
-        setStatus("DONE");
-        setFormData({
-          email: "",
-          message: "",
-          name: "",
-          subject: "",
-        });
-        setStatusText("Message sent successfully!");
-      }, 3000);
-    } catch (error: any) {
-      setStatus("ERROR");
-      setStatusText("Error in sending message: " + error.message);
-      console.error("Error sending message:", error.message);
-    }
+    setTimeout(() => {
+      setStatus("DONE");
+      setFormData({ email: "", message: "", name: "", subject: "" });
+      setStatusText("Message sent successfully!");
+    }, 3000);
   };
 
   useEffect(() => {
     if (status === "DONE" || status === "ERROR") {
-      const timer = setTimeout(() => {
-        setStatus("IDLE");
-      }, 3000);
-
-      return () => {
-        clearTimeout(timer);
-      };
+      const timer = setTimeout(() => setStatus("IDLE"), 3000);
+      return () => clearTimeout(timer);
     }
   }, [status]);
 
   return (
-    <motion.section className="relative min-h-screen" id="contact">
-      {/* Toast Notification */}
+    <section className="border-t border-border bg-background" id="contact">
+      {/* Toast */}
       <AnimatePresence initial={false}>
         {status !== "IDLE" && (
           <motion.div
-            initial={{ opacity: 0, y: -50, x: "-50%" }}
+            initial={{ opacity: 0, y: -40, x: "-50%" }}
             animate={{ opacity: 1, y: 0, x: "-50%" }}
-            exit={{ opacity: 0, y: -50, transition: { duration: 0.2 } }}
-            className={cn(
-              "fixed top-6 left-1/2 -translate-x-1/2 px-6 py-4 z-50 rounded-2xl backdrop-blur-xl border shadow-2xl flex items-center gap-3",
+            exit={{ opacity: 0, y: -40, transition: { duration: 0.2 } }}
+            className={`fixed top-6 left-1/2 z-50 px-5 py-3 rounded-sm border flex items-center gap-3 text-sm font-medium shadow-lg ${
               status === "ERROR"
-                ? "bg-red-500/20 border-red-500/50 text-red-200"
+                ? "bg-background border-red-500/40 text-red-400"
                 : status === "DONE"
-                ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-200"
-                : "bg-orange-400/20 border-orange-400/50 text-amber-200"
-            )}
+                ? "bg-background border-foreground/20 text-foreground"
+                : "bg-background border-border text-muted-foreground"
+            }`}
           >
             {status === "SENDING" && (
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                className="w-5 h-5 border-2 border-orange-400 border-t-transparent rounded-full"
+                className="w-4 h-4 border-2 border-foreground/40 border-t-foreground rounded-full"
               />
             )}
-            {status === "DONE" && (
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-            )}
-            {status === "ERROR" && (
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            )}
-            <p className="font-medium">{statusText || "Sending your message..."}</p>
+            <span>{statusText || "Sending your message…"}</span>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute -top-40 -right-40 w-96 h-96 bg-orange-400/20 rounded-full blur-[120px]"
-        />
-        <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute -bottom-40 -left-40 w-96 h-96 bg-yellow-400/20 rounded-full blur-[120px]"
-        />
-      </div>
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+        {/* Label */}
+        <div className="flex items-center gap-3 mb-12">
+          <div className="h-px w-8 bg-foreground" />
+          <span className="text-xs uppercase tracking-widest text-muted-foreground">Contact</span>
+        </div>
 
-      <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:px-16 py-16 sm:py-20">
-        {/* Header Section */}
-        <Transition>
-          <div className="text-center mb-12 sm:mb-16 md:mb-20">
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ type: "spring", duration: 0.8 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-400/10 border border-orange-400/20 mb-6"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-400"></span>
-              </span>
-              <span className="text-orange-400 text-sm font-medium">Available for work</span>
-            </motion.div>
-            
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-              <span className="text-foreground">Let&apos;s Connect</span>
-              <br />
-              <span className="bg-gradient-to-r from-orange-400 via-yellow-400 to-amber-400 bg-clip-text text-transparent">
-                Start Something Amazing
-              </span>
-            </h2>
-            
-            <p className="text-muted-foreground text-lg sm:text-xl max-w-2xl mx-auto">
-              Have a project in mind? Let&apos;s discuss how we can work together to bring your ideas to life.
-            </p>
-          </div>
-        </Transition>
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
+          {/* Left info panel */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-2 space-y-8"
+          >
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-3">
+                Let&apos;s work<br />together.
+              </h2>
+              <p className="text-muted-foreground leading-relaxed text-sm">
+                Have a project in mind? Send me a message and I&apos;ll get back to you as soon as possible.
+              </p>
+            </div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
-            {/* Contact Info Cards */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Email Card */}
-              <Transition>
-                <motion.a
-                  href={`mailto:${email}`}
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  className="group block p-6 rounded-3xl bg-card/65 border border-border hover:border-orange-400/60 transition-all duration-300 hover:-translate-y-1"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-2xl bg-orange-400/10 border border-orange-400/20 group-hover:bg-orange-400/20 transition-colors">
-                      <svg className="w-6 h-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-amber-300 text-sm mb-1">Email me at</p>
-                      <p className="text-foreground font-semibold text-lg truncate group-hover:text-orange-400 transition-colors">{email}</p>
-                    </div>
-                    <svg className="w-5 h-5 text-amber-400 group-hover:text-orange-400 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
-                </motion.a>
-              </Transition>
-
-              {/* Phone Card */}
-              <Transition>
-                <motion.a
-                  href={`tel:${about.phoneNumber}`}
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  className="group block p-6 rounded-3xl bg-card/65 border border-border hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-2xl bg-purple-500/10 border border-purple-500/20 group-hover:bg-purple-500/20 transition-colors">
-                      <svg className="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-muted-foreground text-sm mb-1">Call me at</p>
-                      <p className="text-foreground font-semibold text-lg group-hover:text-purple-400 transition-colors">{about.phoneNumber}</p>
-                    </div>
-                    <svg className="w-5 h-5 text-muted-foreground group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
-                </motion.a>
-              </Transition>
-
-              {/* Location Card */}
-              <Transition>
-                <motion.div
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  className="group p-6 rounded-3xl bg-card/65 border border-border hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 group-hover:bg-emerald-500/20 transition-colors">
-                      <svg className="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-muted-foreground text-sm mb-1">Based in</p>
-                      <p className="text-foreground font-semibold text-lg group-hover:text-emerald-400 transition-colors">{about.address}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </Transition>
-
-              {/* Social Links */}
-              <Transition>
-                <div className="p-6 rounded-3xl bg-card/65 border border-border transition-all duration-300 hover:-translate-y-1">
-                  <p className="text-muted-foreground text-sm mb-4">Connect with me</p>
-                  <div className="flex flex-wrap gap-3">
-                    {social_handle.map((social, index) =>
-                      social.enabled ? (
-                        <motion.a
-                          key={social._id}
-                          href={social.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={{ scale: 1.1, y: -2 }}
-                          whileTap={{ scale: 0.95 }}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                          className="p-3 rounded-xl bg-background/50 border border-border hover:border-orange-400/50 hover:bg-orange-400/10 text-muted-foreground hover:text-orange-400 transition-all duration-300"
-                          title={social.platform}
-                        >
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d={socialIcons[social.platform] || socialIcons.Github} />
-                          </svg>
-                        </motion.a>
-                      ) : null
-                    )}
-                  </div>
+            {/* contact details */}
+            <div className="space-y-4">
+              <a
+                href={`mailto:${email}`}
+                className="flex items-center gap-3 group text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <div className="w-8 h-8 rounded-sm border border-border flex items-center justify-center group-hover:border-foreground/40 transition-colors">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
                 </div>
-              </Transition>
+                <span>{email}</span>
+              </a>
+              {about.phoneNumber && (
+                <a
+                  href={`tel:${about.phoneNumber}`}
+                  className="flex items-center gap-3 group text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <div className="w-8 h-8 rounded-sm border border-border flex items-center justify-center group-hover:border-foreground/40 transition-colors">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                  <span>{about.phoneNumber}</span>
+                </a>
+              )}
+              {about.address && (
+                <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <div className="w-8 h-8 rounded-sm border border-border flex items-center justify-center">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <span>{about.address}</span>
+                </div>
+              )}
             </div>
 
-            {/* Contact Form */}
-            <div className="lg:col-span-3">
-              <Transition>
-                <motion.form
-                  onSubmit={handleSubmit}
-                  className="p-4 sm:p-6 rounded-2xl bg-card/75 border border-border backdrop-blur-sm shadow-md max-w-full transition-all duration-300 hover:-translate-y-1"
-                  style={{ boxSizing: 'border-box' }}
+            {/* social icons */}
+            <div className="flex flex-wrap gap-2 pt-2">
+              {social_handle.filter(s => s.enabled).map((social) => (
+                <a
+                  key={social._id}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={social.platform}
+                  className="w-9 h-9 rounded-sm border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
                 >
-                  <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">Send a Message</h3>
-                  <p className="text-muted-foreground mb-6 text-sm sm:text-base">Fill out the form below and I&apos;ll get back to you as soon as possible.</p>
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder="Your name"
-                        required
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className="w-full px-3 py-3 rounded-lg border border-border bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
-                      />
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="Your email"
-                        required
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="w-full px-3 py-3 rounded-lg border border-border bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
-                      />
-                    </div>
-                    <input
-                      id="subject"
-                      name="subject"
-                      type="text"
-                      placeholder="Subject"
-                      required
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-3 rounded-lg border border-border bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
-                    />
-                    <textarea
-                      id="message"
-                      name="message"
-                      placeholder="Tell me about your project..."
-                      required
-                      rows={4}
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-3 rounded-lg border border-border bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm resize-none"
-                      style={{ minHeight: 100, maxHeight: 220 }}
-                    />
-                    <button
-                      type="submit"
-                      disabled={status === "SENDING"}
-                      className="w-full py-3 rounded-lg bg-orange-400 hover:bg-amber-400 text-white font-semibold text-base transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
-                    >
-                      {status === "SENDING" ? "Sending..." : "Send Message"}
-                    </button>
-                    {statusText && (
-                      <p className={`text-center text-sm ${status === "DONE" ? "text-green-400" : "text-red-400"}`}>{statusText}</p>
-                    )}
-                  </div>
-                </motion.form>
-              </Transition>
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d={socialIcons[social.platform] || socialIcons.Github} />
+                  </svg>
+                </a>
+              ))}
             </div>
-          </div>
+          </motion.div>
+
+          {/* Right form */}
+          <motion.form
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-3 space-y-4"
+          >
+            <div className="grid sm:grid-cols-2 gap-4">
+              <input name="name" type="text" placeholder="Your name" required value={formData.name} onChange={handleInputChange} className={inputClass} />
+              <input name="email" type="email" placeholder="Your email" required value={formData.email} onChange={handleInputChange} className={inputClass} />
+            </div>
+            <input name="subject" type="text" placeholder="Subject" required value={formData.subject} onChange={handleInputChange} className={inputClass} />
+            <textarea
+              name="message"
+              placeholder="Tell me about your project…"
+              required
+              rows={5}
+              value={formData.message}
+              onChange={handleInputChange}
+              className={`${inputClass} resize-none`}
+            />
+            <button
+              type="submit"
+              disabled={status === "SENDING"}
+              className="w-full py-3 rounded-sm bg-foreground text-background text-sm font-semibold hover:opacity-80 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              {status === "SENDING" ? "Sending…" : "Send Message"}
+            </button>
+          </motion.form>
         </div>
       </div>
-      <footer className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm border-t border-border bg-card/60 mt-8 transition-colors duration-300">
-        <div className="text-muted-foreground">&copy; {new Date().getFullYear()} <span className="font-semibold">Bhavay Batra</span></div>
-        <p className="text-muted-foreground">
-          developed by <Link href="https://github.com/bhavayb" className="hover:underline hover:text-foreground transition-colors">Bhavay Batra</Link>
-        </p>
-      </footer>
-    </motion.section>
+
+      {/* Footer */}
+      <div className="border-t border-border px-5 sm:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
+        <span>&copy; {new Date().getFullYear()} Bhavay Batra</span>
+        <span>
+          developed by{" "}
+          <Link href="https://github.com/bhavayb" className="hover:text-foreground transition-colors underline underline-offset-2">
+            Bhavay Batra
+          </Link>
+        </span>
+      </div>
+    </section>
   );
 };
 
 export default Contact;
-

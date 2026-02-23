@@ -28,6 +28,7 @@ export interface About {
   address: string;
   some_total: string;
   phoneNumber: string;
+  contactEmail?: string;
   avatar: Avatar;
   alternateAvatars: any[];
 }

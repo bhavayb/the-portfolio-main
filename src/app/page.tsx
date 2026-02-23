@@ -1,13 +1,10 @@
 import About from "@/components/about";
+import CodingStats from "@/components/CodingStats";
 import Contact from "@/components/Contact";
-import CustomCursor from "@/components/CustomCursor";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
 import Projects from "@/components/projects";
-import Services from "@/components/Services";
 import Skills from "@/components/Skills";
-import Testimonials from "@/components/testimonials";
-import Timeline from "@/components/Timeline";
 import WorkExperience from "@/components/WorkExperience";
 import { Portfolio } from "@/utils/interface";
 
@@ -39,16 +36,15 @@ export default async function Home() {
   } = portfolio;
 
   return (
-    <main className="relative cursor-none">
-      <CustomCursor />
+    <main className="relative">
       <Header social={social_handles} />
       <Hero about={about} social={social_handles} />
       <About about={about} />
+      <CodingStats />
       <WorkExperience timeline={timeline} />
       <Skills skills={skills} />
       <Projects />
       {/* <Services services={services} /> */}
-      <Timeline timeline={timeline} />
       <Contact email={email} social_handle={social_handles} about={about} />
     </main>
   );

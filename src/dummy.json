@@ -7,8 +7,8 @@
     "description": "Pre-final year BTech student and software developer with hands-on experience in building web applications and working across startup and consulting environments. Currently serving as Technical Head and Senior Associate Consultant at 180 Degrees Consulting, where I work at the intersection of technology and problem-solving. Strong foundation in data structures, a practical approach to development, and a keen interest in building scalable, real-world software solutions.",
     "quote": "The only time you truly fail, is when you decide to give up.",
     "exp_year": "1",
-    "address": "New Delhi , India",
-    "some_total": "90",
+    "address": "New Delhi, India",
+    "some_total": "10",
     "phoneNumber": "+91-9319778881",
     "contactEmail": "batrabhavay79@gmail.com",
     "avatar": {
@@ -34,17 +34,14 @@
   "timeline": [
     {
       "company_name": "RNY Clothing - E-commerce platform for trendy apparel",
-      "summary": "Contributed to the development of a full-stack web application supporting product listings, user interactions, and business workflows.",
+      "summary": "",
       "sequence": 3,
       "startDate": "2023-10-11T00:00:00.000Z",
       "endDate": "2024-03-28T00:00:00.000Z",
-      "jobTitle": "Software Developer Intern",
+      "jobTitle": "Freelancer",
       "jobLocation": "Jaipur, India",
       "bulletPoints": [
         "Developed a full-stack web application with dynamic React-based user interfaces",
-        "Implemented responsive design principles to ensure optimal user experience across devices",
-
-"Built separate user and admin dashboards to manage products, orders, and users",
 
 "Implemented server-side logic using Node.js and Express, exposing RESTful APIs",
 
@@ -73,7 +70,7 @@
     },
     {
       "company_name": "Quratr - AI-powered place discovery platform",
-      "summary": "Contributed to the development of a cloud-based SaaS platform focused on AI-driven place discovery and user engagement.\n",
+      "summary": "",
       "sequence": 1,
       "icon": {
         "public_id": "portfolio3/1710357917833-0mic4.png",
@@ -86,8 +83,6 @@
       "bulletPoints": [
           "Developed a full-stack web application using React for the frontend and Node.js, Express for the backend.",
           " Designed and implemented RESTful APIs supporting end-to-end CRUD operations.",
-          " Performed database design and data modeling using MongoDB for efficient data storage and querying.",
-          " Integrated frontend components with backend APIs, managing asynchronous data flows and state updates.",
           " Tested and debugged APIs using Postman to ensure reliability and correctness."
       ],
       "forEducation": false,

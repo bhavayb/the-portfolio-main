@@ -1,127 +1,182 @@
 "use client";
 
-import Image from "next/image";
+import { useState } from "react";
+import { motion } from "motion/react";
 import { Skill } from "../utils/interface";
-import { motion } from "framer-motion";
 
 interface SkillsProps {
   skills: Skill[];
 }
 
-// Priority skills to show first
-const prioritySkills = [
-  "Next.js", "Nextjs", "Next js",
-  "React", "React.js", "Reactjs",
-  "TypeScript", "Typescript",
-  "JavaScript", "Javascript",
-  "Node.js", "Nodejs", "Node",
-  "Express", "Express.js",
-  "MongoDB", "Mongo",
-  "PostgreSQL", "Postgres",
-  "Tailwind", "Tailwind CSS",
-  "Prisma",
-  "Docker",
-  "Git", "GitHub"
-];
-
-
 function Skills({ skills }: SkillsProps) {
-  // Sort skills: priority skills first, then the rest
-  const sortedSkills = [...skills].sort((a, b) => {
-    const aIndex = prioritySkills.findIndex(p =>
-      a.name.toLowerCase().includes(p.toLowerCase())
-    );
-    const bIndex = prioritySkills.findIndex(p =>
-      b.name.toLowerCase().includes(p.toLowerCase())
-    );
-    if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
-    if (aIndex !== -1) return -1;
-    if (bIndex !== -1) return 1;
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  // Sort by percentage desc, then sequence
+  const sorted = [...skills]
+    .filter((s) => s.enabled)
+    .sort((a, b) => b.percentage - a.percentage || a.sequence - b.sequence);
+
+  // Deduplicate by lowercase name
+  const seen = new Set<string>();
+  const unique: Skill[] = [];
+  for (const s of sorted) {
+    const key = s.name.trim().toLowerCase();
+    if (!seen.has(key)) { seen.add(key); unique.push(s); }
+  }
+
+  if (unique.length === 0) return null;
+
+  // Priority order for Core Stack — important skills first
+  const priority = [
+    "next.js", "react", "typescript", "javascript",
+    "node.js", "mongodb", "postgresql", "tailwind css",
+  ];
+
+  const coreRaw = [...unique].sort((a, b) => {
+    const ai = priority.indexOf(a.name.trim().toLowerCase());
+    const bi = priority.indexOf(b.name.trim().toLowerCase());
+    if (ai !== -1 && bi !== -1) return ai - bi;
+    if (ai !== -1) return -1;
+    if (bi !== -1) return 1;
     return 0;
   });
 
-  // Deduplicate by name and filter enabled
-  const uniqueMap = new Map<string, Skill>();
-  for (const s of sortedSkills) {
-    const key = s.name.trim().toLowerCase();
-    if (!uniqueMap.has(key) && s.enabled) uniqueMap.set(key, s);
-  }
-  const enabledSkills = Array.from(uniqueMap.values());
+  const core = coreRaw.slice(0, 7);
 
-  // Split skills into two rails
-  const mid = Math.ceil(enabledSkills.length / 2);
-  const rail1 = enabledSkills.slice(0, mid);
-  const rail2 = enabledSkills.slice(mid);
+  // Opacity tier based on proficiency
+  const chipOpacity = (pct: number) => {
+    if (pct >= 90) return 1;
+    if (pct >= 75) return 0.65;
+    if (pct >= 60) return 0.45;
+    return 0.3;
+  };
 
-  // Helper to render a skill card
-  const SkillCard = (skill: Skill) => (
-    <div
-      key={skill._id}
-      className="flex flex-col items-center justify-start flex-shrink-0 group w-[120px] sm:w-[140px] md:w-[160px] transition-transform duration-300 hover:-translate-y-1"
-    >
-      <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-card/70 border border-border backdrop-blur-sm group-hover:bg-card/90 group-hover:border-yellow-400/60 group-hover:scale-105 transition-all duration-300 shadow-md flex items-center justify-center p-3">
-        <div className="relative w-full h-full">
-          <Image
-            src={skill.image.url}
-            alt={skill.name}
-            fill
-            className="object-contain"
-            sizes="96px"
-          />
-        </div>
-      </div>
-      <span className="mt-3 text-sm font-semibold text-foreground/80 group-hover:text-foreground transition-colors text-center w-full px-2 overflow-hidden text-ellipsis whitespace-nowrap">
-        {skill.name}
-      </span>
-    </div>
-  );
-
-  // Animation durations scale with count for smoothness, but are faster (smaller multiplier)
-  const duration1 = Math.max(12, rail1.length * 1.1);
-  const duration2 = Math.max(12, rail2.length * 1.1);
+  const tiers = [
+    { label: "Expert",     count: unique.filter((s) => s.percentage >= 90).length },
+    { label: "Proficient", count: unique.filter((s) => s.percentage >= 70 && s.percentage < 90).length },
+    { label: "Familiar",   count: unique.filter((s) => s.percentage < 70).length },
+  ];
 
   return (
-    <section id="skills" className="py-16 sm:py-20 md:py-24 overflow-hidden bg-gradient-to-b from-transparent via-amber-100/20 dark:via-amber-900/10 to-transparent relative transition-colors duration-300">
-      <span className="blob absolute top-[30%] right-0 w-1/4 h-2/3 blur-[80px] rotate-180 -z-20 opacity-12" />
-      <div className="text-center mb-10 sm:mb-12 md:mb-16 px-4">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_18px_rgba(251,191,36,0.2)]">
-          Skills & <span className="text-orange-400">Technologies</span>
-        </h2>
-        <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-orange-500 to-yellow-400 mx-auto rounded-full mb-3 sm:mb-4" />
-        <p className="text-muted-foreground text-base sm:text-lg">Technologies I work with</p>
-      </div>
+    <section id="skills" className="py-24 sm:py-32 border-t border-border bg-background">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
 
-      {/* Two animated rails: one left-to-right, one right-to-left (color updated) */}
-      <div className="space-y-8 md:space-y-12">
-        {/* Top rail: left to right */}
-        <div className="overflow-hidden w-full">
-          <motion.div
-            className="flex flex-nowrap gap-8 md:gap-12 items-start"
-            initial={{ x: "-100%" }}
-            animate={{ x: "100%" }}
-            transition={{
-              duration: duration1,
-              ease: "linear",
-              repeat: Infinity,
-            }}
-          >
-            {rail1.map(SkillCard)}
-          </motion.div>
+        {/* Header row */}
+        <div className="flex items-center justify-between mb-16">
+          <div className="flex items-center gap-3">
+            <div className="h-px w-8 bg-foreground" />
+            <span className="text-xs uppercase tracking-widest text-muted-foreground">
+              Skills &amp; Technologies
+            </span>
+          </div>
+          <span className="font-mono text-xs text-muted-foreground/40 hidden sm:block tabular-nums">
+            {unique.length.toString().padStart(2, "0")} tools
+          </span>
         </div>
-        {/* Bottom rail: right to left */}
-        <div className="overflow-hidden w-full">
-          <motion.div
-            className="flex flex-nowrap gap-8 md:gap-12 items-start"
-            initial={{ x: "100%" }}
-            animate={{ x: "-100%" }}
-            transition={{
-              duration: duration2,
-              ease: "linear",
-              repeat: Infinity,
-            }}
-          >
-            {rail2.map(SkillCard)}
-          </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24">
+
+          {/* ── Left: Core stack with progress bars ── */}
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-8">
+              — Core Stack
+            </p>
+
+            <div className="space-y-7">
+              {core.map((skill, i) => (
+                <motion.div
+                  key={skill._id}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06, duration: 0.45 }}
+                  onMouseEnter={() => setHoveredId(skill._id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  className="group"
+                >
+                  <div className="flex items-baseline justify-between mb-2">
+                    <span className="font-mono text-sm font-semibold text-foreground tracking-wide">
+                      {skill.name}
+                    </span>
+                    <span
+                      className="font-mono text-xs tabular-nums transition-opacity duration-200"
+                      style={{
+                        opacity: hoveredId === skill._id ? 1 : 0.4,
+                      }}
+                    >
+                      {skill.percentage}
+                      <span className="text-[10px]">%</span>
+                    </span>
+                  </div>
+
+                  {/* Progress track */}
+                  <div className="relative h-px w-full bg-border">
+                    <motion.div
+                      className="absolute left-0 top-0 h-full bg-foreground"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${skill.percentage}%` }}
+                      viewport={{ once: true }}
+                      transition={{
+                        delay: i * 0.06 + 0.2,
+                        duration: 0.9,
+                        ease: [0.25, 0.46, 0.45, 0.94],
+                      }}
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* ── Right: All tools chip grid + tier summary ── */}
+          <div className="flex flex-col justify-between">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-8">
+                — All Tools
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {unique.map((skill, i) => (
+                  <motion.span
+                    key={skill._id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: chipOpacity(skill.percentage), scale: 1 }}
+                    whileHover={{ opacity: 1, scale: 1.05 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.02, duration: 0.25 }}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-border rounded-sm font-mono text-xs uppercase tracking-wide text-foreground cursor-default select-none"
+                  >
+                    {/* Filled dot = expert tier */}
+                    {skill.percentage >= 90 && (
+                      <span className="w-1 h-1 rounded-full bg-foreground shrink-0" />
+                    )}
+                    {skill.name}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
+
+            {/* Tier summary strip */}
+            <div className="mt-10 pt-6 border-t border-border grid grid-cols-3 gap-6">
+              {tiers.map(({ label, count }, i) => (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + i * 0.07, duration: 0.4 }}
+                >
+                  <p className="font-mono text-3xl font-bold text-foreground tabular-nums leading-none">
+                    {count.toString().padStart(2, "0")}
+                  </p>
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-2">
+                    {label}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
