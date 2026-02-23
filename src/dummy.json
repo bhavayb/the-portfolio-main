@@ -330,6 +330,83 @@
         "url": "https://www.svgrepo.com/show/327408/logo-vercel.svg"
       },
       "_id": "65b3de89b48589dfcae18015"
+    },
+    {
+      "enabled": true,
+      "name": "SQL",
+      "sequence": 21,
+      "percentage": 85,
+      "image": {
+        "public_id": "mysql",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+      },
+      "_id": "65b3de89b48589dfcae18016"
+    },
+    {
+      "enabled": true,
+      "name": "Express",
+      "sequence": 22,
+      "percentage": 88,
+      "image": {
+        "public_id": "express",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+      },
+      "_id": "65b3de89b48589dfcae18017"
+    },
+    {
+      "enabled": true,
+      "name": "PostgreSQL",
+      "sequence": 23,
+      "percentage": 78,
+      "image": {
+        "public_id": "postgresql",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+      },
+      "_id": "65b3de89b48589dfcae18018"
+    },
+    {
+      "enabled": true,
+      "name": "Prisma",
+      "sequence": 24,
+      "percentage": 78,
+      "image": {
+        "public_id": "prisma",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg"
+      },
+      "_id": "65b3de89b48589dfcae18019"
+    },
+    {
+      "enabled": true,
+      "name": "Postman",
+      "sequence": 25,
+      "percentage": 92,
+      "image": {
+        "public_id": "postman",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg"
+      },
+      "_id": "65b3de89b48589dfcae18020"
+    },
+    {
+      "enabled": true,
+      "name": "React Native",
+      "sequence": 26,
+      "percentage": 80,
+      "image": {
+        "public_id": "react-native",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+      },
+      "_id": "65b3de89b48589dfcae18021"
+    },
+    {
+      "enabled": true,
+      "name": "AWS",
+      "sequence": 27,
+      "percentage": 75,
+      "image": {
+        "public_id": "amazonwebservices",
+        "url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
+      },
+      "_id": "65b3de89b48589dfcae18022"
     }
   ],
   "youtube": [

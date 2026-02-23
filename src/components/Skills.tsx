@@ -28,8 +28,8 @@ function Skills({ skills }: SkillsProps) {
 
   // Priority order for Core Stack — important skills first
   const priority = [
-    "next.js", "react", "typescript", "javascript",
-    "node.js", "mongodb", "postgresql", "tailwind css",
+    "next.js", "react", "react native", "typescript", "javascript",
+    "node.js", "express", "postgresql", "mongodb",
   ];
 
   const coreRaw = [...unique].sort((a, b) => {
@@ -41,7 +41,7 @@ function Skills({ skills }: SkillsProps) {
     return 0;
   });
 
-  const core = coreRaw.slice(0, 7);
+  const core = coreRaw.slice(0, 8);
 
   // Opacity tier based on proficiency
   const chipOpacity = (pct: number) => {
