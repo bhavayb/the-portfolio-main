@@ -39,7 +39,8 @@ const Hero = ({ about, social }: HeroProps) => {
                 alt={about.name}
                 fill
                 sizes="(max-width: 480px) 160px, (max-width: 640px) 192px, (max-width: 768px) 240px, (max-width: 1024px) 256px, (max-width: 1280px) 288px, 320px"
-                className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-500"
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                style={{ objectPosition: '50% 15%' }}
                 priority
               />
             </div>
