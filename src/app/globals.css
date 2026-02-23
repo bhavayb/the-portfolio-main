@@ -372,4 +372,40 @@ html {
   animation: scroll-down 2s ease-in-out infinite;
 }
 
+/* ── Card wave ripple ── */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes wave-expand {
+  0%   { transform: scale(0); opacity: 0.45; }
+  60%  { opacity: 0.18; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+.wave-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.15) 45%,
+    transparent 70%
+  );
+  animation: wave-expand 0.75s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  pointer-events: none;
+  z-index: 10;
+  transform-origin: center;
+}
+
+:root:not(.dark) .wave-ripple {
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.12) 0%,
+    rgba(0, 0, 0, 0.04) 45%,
+    transparent 70%
+  );
+}
+
 

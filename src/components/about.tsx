@@ -50,10 +50,6 @@ const About = ({ about }: AboutProps) => {
             transition={{ duration: 0.55 }}
             className="lg:col-span-3 space-y-8"
           >
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.05]">
-              {about.name}
-            </h2>
-
             <p className="text-muted-foreground leading-[1.85] text-base sm:text-lg max-w-2xl">
               {about.description}
             </p>

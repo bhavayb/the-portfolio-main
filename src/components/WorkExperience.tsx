@@ -3,61 +3,72 @@
 import { motion } from "motion/react";
 import { Timeline as ITimeline } from "../utils/interface";
 import { formatDate } from "../utils";
+import { useSpotlight } from "../utils/useSpotlight";
 
 interface WorkExperienceProps {
   timeline: ITimeline[];
 }
 
-const EntryCard = ({ item, index }: { item: ITimeline; index: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: index * 0.08, duration: 0.45 }}
-    className="relative pl-6"
-  >
-    {/* dot */}
-    <div className="absolute left-0 top-5 -translate-x-1/2 w-2 h-2 rounded-full bg-foreground ring-4 ring-background" />
+const EntryCard = ({ item, index }: { item: ITimeline; index: number }) => {
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useSpotlight<HTMLDivElement>();
 
-    <div className="group p-5 rounded-sm bg-card border border-border hover:border-foreground/30 transition-all duration-300">
-      {/* Date badge */}
-      <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-muted border border-border text-[10px] text-muted-foreground mb-3 uppercase tracking-widest font-mono">
-        {formatDate(item.startDate).month} {formatDate(item.startDate).year}
-        {" - "}
-        {formatDate(item.endDate).month} {formatDate(item.endDate).year}
-      </div>
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.08, duration: 0.45 }}
+      className="relative pl-6"
+    >
+      {/* dot */}
+      <div className="absolute left-0 top-5 -translate-x-1/2 w-2 h-2 rounded-full bg-foreground ring-4 ring-background" />
 
-      <h3 className="text-base font-bold text-foreground mb-1">{item.jobTitle}</h3>
+      <div
+        ref={ref}
+        onMouseEnter={onMouseEnter}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        className="spotlight-card group p-5 rounded-sm bg-card border border-border hover:border-foreground/30 transition-all duration-300"
+      >
+        {/* Date badge */}
+        <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-muted border border-border text-[10px] text-muted-foreground mb-3 uppercase tracking-widest font-mono">
+          {formatDate(item.startDate).month} {formatDate(item.startDate).year}
+          {" - "}
+          {formatDate(item.endDate).month} {formatDate(item.endDate).year}
+        </div>
 
-      <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mb-3">
-        {item.company_name && (
-          <span className="font-medium text-foreground/80">{item.company_name}</span>
+        <h3 className="text-base font-bold text-foreground mb-1">{item.jobTitle}</h3>
+
+        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mb-3">
+          {item.company_name && (
+            <span className="font-medium text-foreground/80">{item.company_name}</span>
+          )}
+          {item.jobLocation && (
+            <>
+              {item.company_name && <span className="text-border">·</span>}
+              <span>{item.jobLocation.trim()}</span>
+            </>
+          )}
+        </div>
+
+        {item.summary && (
+          <p className="text-muted-foreground text-sm leading-relaxed mb-3">{item.summary}</p>
         )}
-        {item.jobLocation && (
-          <>
-            {item.company_name && <span className="text-border">·</span>}
-            <span>{item.jobLocation.trim()}</span>
-          </>
+
+        {item.bulletPoints && item.bulletPoints.length > 0 && (
+          <ul className="space-y-1.5">
+            {item.bulletPoints.map((point, idx) => (
+              <li key={idx} className="flex items-start gap-2.5 text-muted-foreground text-sm">
+                <span className="mt-2 w-1 h-1 rounded-full bg-foreground/40 flex-shrink-0" />
+                <span>{point.trim()}</span>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
-
-      {item.summary && (
-        <p className="text-muted-foreground text-sm leading-relaxed mb-3">{item.summary}</p>
-      )}
-
-      {item.bulletPoints && item.bulletPoints.length > 0 && (
-        <ul className="space-y-1.5">
-          {item.bulletPoints.map((point, idx) => (
-            <li key={idx} className="flex items-start gap-2.5 text-muted-foreground text-sm">
-              <span className="mt-2 w-1 h-1 rounded-full bg-foreground/40 flex-shrink-0" />
-              <span>{point.trim()}</span>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
 const WorkExperience = ({ timeline }: WorkExperienceProps) => {
   const experience = timeline

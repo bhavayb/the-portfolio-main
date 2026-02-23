@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { useSpotlight } from "../utils/useSpotlight";
 
 interface Project {
   liveurl: string;
@@ -201,13 +202,16 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
 
 const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => void }) => {
   const [hovered, setHovered] = useState(false);
+  const { ref, onMouseEnter: spotEnter, onMouseMove, onMouseLeave: spotLeave } = useSpotlight<HTMLDivElement>();
 
   return (
     <div
+      ref={ref}
       onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="group cursor-pointer border border-border rounded-sm overflow-hidden hover:border-foreground/30 transition-all duration-300 bg-card"
+      onMouseMove={onMouseMove}
+      onMouseEnter={(e) => { setHovered(true); spotEnter(e); }}
+      onMouseLeave={(e) => { setHovered(false); spotLeave(); }}
+      className="spotlight-card group cursor-pointer border border-border rounded-sm overflow-hidden hover:border-foreground/30 transition-all duration-300 bg-card"
     >
       {/* Image */}
       <div className="relative aspect-video overflow-hidden">
